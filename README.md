@@ -2,6 +2,8 @@
 
 Сайт [exDesktop](https://exdesktop.xyz): модифицированный кроссплатформенный клиент Telegram для компьютера. Версия на сайте — 7.3.3.(5), лицензия GPL-3.0.
 
+Исходники этого сайта: [github.com/birafaa/ExDesktop.ME](https://github.com/birafaa/ExDesktop.ME).
+
 Стек: React, TypeScript, Vite, Material UI.
 
 ## Запуск
