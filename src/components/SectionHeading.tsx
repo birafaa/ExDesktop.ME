@@ -7,13 +7,13 @@ export function SectionHeading({
 }: {
   id: string
   titleId: string
-  kicker: string
+  kicker?: string
   title: string
   intro?: string
 }) {
   return (
     <header className="section-head" id={id}>
-      <p className="kicker">{kicker}</p>
+      {kicker ? <p className="kicker">{kicker}</p> : null}
       <h2 id={titleId} className="section-title">
         {title}
       </h2>

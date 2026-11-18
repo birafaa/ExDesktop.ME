@@ -27,7 +27,13 @@ export function Hero() {
           <p className="hero__summary">{site.summary}</p>
           <p className="section-intro">{home.hero.extra}</p>
           <div className="hero__actions">
-            <Button variant="contained" href="#install" startIcon={<DownloadOutlinedIcon />}>
+            <Button
+              variant="contained"
+              href={site.windows.href}
+              target="_blank"
+              rel="noreferrer"
+              startIcon={<DownloadOutlinedIcon />}
+            >
               {ui.actions.download}
             </Button>
             <Button
@@ -59,7 +65,7 @@ export function Hero() {
       <section className="preview" aria-label={ui.preview.label}>
         <div className="wrap preview__frame">
           <div className="blob" />
-          <DesktopMock layout="split" />
+          <DesktopMock />
         </div>
       </section>
     </>

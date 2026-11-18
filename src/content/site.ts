@@ -14,9 +14,6 @@ export const site = {
     size: "81.6 MB",
     href: "https://github.com/metawka/exDesktop/releases/download/v7.3.3.5/exDesktop-setup-x64.7.3.3.5.exe",
   },
-  releasesUrl: "https://github.com/metawka/exDesktop/releases",
-  installCommand:
-    "curl -fsSL https://raw.githubusercontent.com/metawka/exDesktop/main/install.sh | sh",
   githubUrl: "https://github.com/metawka/exDesktop",
   telegramUrl: "https://t.me/exDesktop",
   siteUrl: "https://exdesktop.xyz",

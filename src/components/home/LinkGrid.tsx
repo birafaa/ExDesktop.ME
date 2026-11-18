@@ -8,12 +8,7 @@ export function LinkGrid() {
   return (
     <section className="section" aria-labelledby="links-title">
       <div className="wrap">
-        <SectionHeading
-          id={block.id}
-          titleId="links-title"
-          kicker={block.kicker}
-          title={block.title}
-        />
+        <SectionHeading id={block.id} titleId="links-title" title={block.title} />
         <div className="link-grid">
           {block.items.map((item) => {
             const body = (

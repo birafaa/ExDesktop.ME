@@ -25,20 +25,9 @@ export const ui = {
     copied: "Скопировано",
     copyFailed: "Не удалось скопировать",
     home: "На главную",
-    releases: "Все релизы",
   },
   preview: {
     label: "Схематичное окно клиента",
-  },
-  install: {
-    tabsLabel: "Платформа установки",
-    sharedCommand: "Одна команда для Linux и macOS.",
-    fileLabel: "Файл установщика",
-    commandLabel: "Команда",
-  },
-  studio: {
-    groupLabel: "Макет окна",
-    scrollHint: "Макет шире экрана — его можно прокрутить.",
   },
   docs: {
     title: "Документация",

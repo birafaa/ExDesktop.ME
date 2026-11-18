@@ -315,7 +315,6 @@ a {
 .docs-intro h1,
 .prose h1,
 .prose h2,
-.card h3,
 .link-card__title,
 .passport__version {
   font-family: "Unbounded Variable", Unbounded, sans-serif;
@@ -362,8 +361,7 @@ a {
   margin-top: 22px;
 }
 
-.chip,
-.chips li {
+.chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -376,18 +374,8 @@ a {
   font-weight: 800;
 }
 
-.chip a,
-.chips a {
+.chip a {
   color: inherit;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 12px;
-  padding: 0;
-  list-style: none;
 }
 
 .platform-row {
@@ -425,171 +413,6 @@ a {
   50% {
     border-radius: 60% 40% 58% 42% / 42% 64% 36% 58%;
   }
-}
-
-.bento {
-  display: grid;
-  gap: 16px;
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--outline-variant);
-  border-radius: 28px;
-  padding: 22px;
-}
-
-.card h3 {
-  margin: 0 0 12px;
-  font-size: 1.35rem;
-}
-
-.card p {
-  margin: 0;
-}
-
-.card--lead {
-  background: var(--primary-container);
-  color: var(--on-primary-container);
-  border-color: transparent;
-}
-
-.card--lead p,
-.card--lead h3 {
-  color: inherit;
-}
-
-.facts {
-  display: grid;
-  gap: 6px;
-  margin: 0 0 12px;
-  padding: 0;
-  list-style: none;
-  font-weight: 800;
-}
-
-.facts a {
-  overflow-wrap: anywhere;
-}
-
-.layout-switch.MuiToggleButtonGroup-root {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 4px 0 18px;
-}
-
-.layout-switch .MuiToggleButtonGroup-grouped {
-  margin: 0 !important;
-  border: 1.5px solid var(--outline-variant) !important;
-  border-radius: 999px !important;
-  color: var(--ink);
-  font-weight: 800;
-  text-transform: none;
-  min-height: 48px;
-  padding: 10px 18px;
-}
-
-.layout-switch .MuiToggleButton-root.Mui-selected {
-  background: var(--primary);
-  color: var(--on-primary);
-}
-
-.layout-switch .MuiToggleButton-root.Mui-selected:hover {
-  background: color-mix(in srgb, var(--primary) 86%, #000);
-}
-
-.studio__stage {
-  overflow-x: auto;
-  padding-bottom: 8px;
-}
-
-.scroll-hint {
-  display: none;
-  margin: 8px 0 0;
-  color: var(--ink-muted);
-}
-
-.install {
-  background: var(--surface);
-  border: 1px solid var(--outline-variant);
-  border-radius: 28px;
-  padding: 8px 8px 22px;
-}
-
-.install__panel {
-  padding: 8px 14px 0;
-}
-
-.install__file {
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-weight: 700;
-  overflow-wrap: anywhere;
-}
-
-.install__size {
-  margin: 6px 0 16px;
-  color: var(--ink-muted);
-  font-weight: 800;
-}
-
-.command {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  margin: 12px 0;
-  padding: 12px;
-  border-radius: 20px;
-  background: var(--surface-container);
-}
-
-.command code {
-  flex: 1 1 220px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  overflow-wrap: anywhere;
-}
-
-.roadmap {
-  position: relative;
-  display: grid;
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.roadmap::before {
-  content: "";
-  position: absolute;
-  left: 18px;
-  top: 12px;
-  bottom: 12px;
-  width: 4px;
-  border-radius: 99px;
-  background: var(--primary-container);
-}
-
-.roadmap li {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: 14px;
-  align-items: start;
-}
-
-.roadmap__index {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: var(--on-primary);
-  font-size: 0.8rem;
-  font-weight: 800;
 }
 
 .passport {
@@ -1031,13 +854,11 @@ mark {
 }
 
 @media (hover: hover) {
-  .card:hover,
   .link-card:hover {
     border-radius: 18px 34px 20px 30px;
     transform: translateY(-3px);
   }
 
-  .card,
   .link-card {
     transition:
       border-radius 320ms cubic-bezier(0.2, 0, 0, 1),
@@ -1052,14 +873,6 @@ mark {
 @media (min-width: 720px) {
   .wrap {
     width: min(1120px, calc(100% - 64px));
-  }
-
-  .bento {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .card--lead {
-    grid-column: span 2;
   }
 
   .passport {
@@ -1084,26 +897,6 @@ mark {
 
   .MuiIconButton-root.burger {
     display: none;
-  }
-
-  .bento {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .card--lead {
-    grid-column: span 4;
-  }
-
-  .bento .card:nth-child(2) {
-    grid-column: span 2;
-  }
-
-  .bento .card:nth-child(n + 3):nth-child(-n + 5) {
-    grid-column: span 2;
-  }
-
-  .bento .card:nth-child(6) {
-    grid-column: span 6;
   }
 
   .link-grid {
@@ -1153,12 +946,6 @@ mark {
   .docs-toc--side a {
     display: block;
     border-radius: 12px;
-  }
-}
-
-@media (max-width: 799px) {
-  .scroll-hint {
-    display: block;
   }
 }
 

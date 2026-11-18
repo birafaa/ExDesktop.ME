@@ -15,7 +15,7 @@ export function ReleasePassport() {
   return (
     <section className="section" aria-labelledby="passport-title">
       <div className="wrap">
-        <SectionHeading id={block.id} titleId="passport-title" kicker={block.kicker} title={block.title} />
+        <SectionHeading id={block.id} titleId="passport-title" title={block.title} />
         <div className="passport">
           <div>
             <p className="passport__label">Версия</p>

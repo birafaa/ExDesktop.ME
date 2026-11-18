@@ -1,5 +1,3 @@
-import type { MockLayoutId } from "../../content/home.ts"
-
 const chats = [
   { name: "Диалог 1", time: "12:41", shape: "round", active: true },
   { name: "Диалог 2", time: "11:05", shape: "squircle", active: false },
@@ -8,9 +6,9 @@ const chats = [
   { name: "Диалог 5", time: "пн", shape: "squircle", active: false },
 ]
 
-export function DesktopMock({ layout = "split" }: { layout?: MockLayoutId }) {
+export function DesktopMock() {
   return (
-    <div className={`mock mock--${layout}`} aria-hidden="true">
+    <div className="mock" aria-hidden="true">
       <div className="mock__chrome">
         <span className="mock__dots">
           <i />
@@ -67,16 +65,6 @@ export function DesktopMock({ layout = "split" }: { layout?: MockLayoutId }) {
                 <path fill="currentColor" d="M4 12 19 5l-5.2 14-2.3-5.5L4 12Z" />
               </svg>
             </div>
-          </div>
-        </div>
-        <div className="mock__side">
-          <span className="mock__avatar mock__avatar--leaf mock__avatar--lg" />
-          <span className="mock__side-line" style={{ width: "72%" }} />
-          <span className="mock__side-line" style={{ width: "48%" }} />
-          <span className="mock__side-line" style={{ width: "80%" }} />
-          <div className="mock__side-pills">
-            <span />
-            <span />
           </div>
         </div>
       </div>
