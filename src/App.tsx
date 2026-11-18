@@ -13,6 +13,7 @@ export default function App() {
           <Route element={<SiteLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/docs" element={<DocsPage />} />
+            <Route path="/docs/ai" element={<DocsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

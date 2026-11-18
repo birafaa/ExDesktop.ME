@@ -304,6 +304,7 @@ a {
 .hero h1,
 .not-found h1,
 .docs-intro h1,
+.prose h1,
 .prose h2,
 .card h3,
 .link-card__title,
@@ -316,6 +317,7 @@ a {
 
 .section-title,
 .docs-intro h1,
+.prose h1,
 .not-found h1 {
   margin: 0;
   font-size: clamp(1.8rem, 4vw, 2.7rem);
@@ -691,6 +693,18 @@ a {
   gap: 20px;
 }
 
+.docs-shell > * {
+  min-width: 0;
+}
+
+.prose,
+.prose h1,
+.prose h2,
+.prose h3,
+.inline-code {
+  overflow-wrap: break-word;
+}
+
 .docs-side,
 .docs-toc--side {
   display: none;
@@ -779,6 +793,12 @@ kbd {
   margin-bottom: 8px;
 }
 
+@media (max-width: 719px) {
+  .docs-toc--bar {
+    display: none;
+  }
+}
+
 .docs-toc--bar a,
 .docs-toc--side a {
   padding: 6px 10px;
@@ -800,7 +820,59 @@ kbd {
 }
 
 .prose {
-  max-width: 72ch;
+  max-width: 78ch;
+}
+
+.prose .lead {
+  font-size: 1.15rem;
+}
+
+.inline-code {
+  padding: 0.05em 0.35em;
+  border-radius: 6px;
+  background: var(--surface-container);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+
+.docs-table-wrap {
+  margin: 16px 0;
+  overflow-x: auto;
+}
+
+.docs-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.docs-table-wrap th,
+.docs-table-wrap td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--outline-variant);
+  text-align: left;
+  vertical-align: top;
+}
+
+.docs-table-wrap th {
+  font-weight: 800;
+}
+
+.docs-nav-group {
+  display: grid;
+  gap: 4px;
+}
+
+.docs-nav-group + .docs-nav-group {
+  margin-top: 18px;
+}
+
+.docs-nav-label {
+  margin: 0 0 4px;
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .prose h2,
@@ -854,8 +926,7 @@ h3[id] {
 
 .codeblock code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  white-space: pre;
 }
 
 .codeblock .MuiButton-root {

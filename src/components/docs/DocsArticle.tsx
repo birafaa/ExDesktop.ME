@@ -1,48 +1,46 @@
-import { Fragment, useState } from "react"
-import { type DocBlock, type DocSection } from "../../content/docs.ts"
-import { site } from "../../content/site.ts"
+import { Fragment, type ReactNode } from "react"
+import { Link } from "react-router-dom"
+import {
+  inlineText,
+  type DocBlock,
+  type DocPage,
+  type DocSection,
+  type Inline,
+} from "../../content/docs.ts"
 import { CopyButton } from "../CopyButton.tsx"
 import { Highlight } from "../Highlight.tsx"
 
-function FaqList({
-  items,
-  query,
-}: {
-  items: { id: string; q: string; a: string }[]
-  query: string
-}) {
-  const [openIds, setOpenIds] = useState<string[]>([])
-  const searching = query.trim().length > 0
-
+function DocLink({ href, children }: { href: string; children: ReactNode }) {
+  if (href.startsWith("/")) return <Link to={href}>{children}</Link>
+  if (href.startsWith("#")) return <a href={href}>{children}</a>
   return (
-    <div className="faq">
-      {items.map((item) => {
-        const expanded = searching || openIds.includes(item.id)
-        return (
-          <div key={item.id} className="faq__item">
-            <h3>
-              <button
-                type="button"
-                aria-expanded={expanded}
-                aria-controls={item.id}
-                onClick={() => {
-                  setOpenIds((current) =>
-                    current.includes(item.id) ? current.filter((id) => id !== item.id) : [...current, item.id],
-                  )
-                }}
-              >
-                <Highlight text={item.q} query={query} />
-              </button>
-            </h3>
-            {expanded ? (
-              <div id={item.id} role="region">
-                <Highlight text={item.a} query={query} />
-              </div>
-            ) : null}
-          </div>
-        )
+    <a href={href} target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  )
+}
+
+function Inlines({ parts, query }: { parts: Inline[]; query: string }) {
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (part.t === "code") {
+          return (
+            <code key={index} className="inline-code" translate="no">
+              <Highlight text={part.v} query={query} />
+            </code>
+          )
+        }
+        if (part.t === "link") {
+          return (
+            <DocLink key={index} href={part.href}>
+              <Highlight text={part.v} query={query} />
+            </DocLink>
+          )
+        }
+        return <Highlight key={index} text={part.v} query={query} />
       })}
-    </div>
+    </>
   )
 }
 
@@ -50,9 +48,15 @@ function Block({ block, query }: { block: DocBlock; query: string }) {
   switch (block.type) {
     case "p":
       return (
-        <p>
-          <Highlight text={block.text} query={query} />
+        <p className={block.lead ? "lead" : undefined}>
+          <Inlines parts={block.inlines} query={query} />
         </p>
+      )
+    case "note":
+      return (
+        <aside className="note">
+          <Inlines parts={block.inlines} query={query} />
+        </aside>
       )
     case "h3":
       return (
@@ -61,49 +65,62 @@ function Block({ block, query }: { block: DocBlock; query: string }) {
         </h3>
       )
     case "ul":
+    case "ol": {
+      const Tag = block.type
       return (
-        <ul>
+        <Tag>
           {block.items.map((item, index) => (
-            <li key={`${index}-${item}`}>
-              <Highlight text={item} query={query} />
+            <li key={`${index}-${inlineText(item).slice(0, 24)}`}>
+              <Inlines parts={item} query={query} />
             </li>
           ))}
-        </ul>
+        </Tag>
       )
-    case "platforms":
-      return (
-        <ul className="chips">
-          {site.platforms.map((name) => (
-            <li key={name}>{name}</li>
-          ))}
-        </ul>
-      )
+    }
     case "code":
       return (
         <figure className="codeblock">
-          <figcaption>{block.label}</figcaption>
           <pre>
             <code translate="no">{block.code}</code>
           </pre>
           <CopyButton text={block.code} />
         </figure>
       )
-    case "note":
+    case "table":
       return (
-        <aside className="note">
-          <Highlight text={block.text} query={query} />
-        </aside>
+        <div className="docs-table-wrap">
+          <table>
+            {block.headers.length > 0 ? (
+              <thead>
+                <tr>
+                  {block.headers.map((cell, index) => (
+                    <th key={index} scope="col">
+                      <Inlines parts={cell} query={query} />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            ) : null}
+            <tbody>
+              {block.rows.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {row.map((cell, cellIndex) => (
+                    <td key={cellIndex}>
+                      <Inlines parts={cell} query={query} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )
-    case "faq":
-      return <FaqList items={block.items} query={query} />
     case "links":
       return (
         <ul className="docs-links">
           {block.items.map((item) => (
             <li key={item.href}>
-              <a href={item.href} target="_blank" rel="noreferrer">
-                {item.label}
-              </a>
+              <DocLink href={item.href}>{item.label}</DocLink>
             </li>
           ))}
         </ul>
@@ -115,9 +132,27 @@ function Block({ block, query }: { block: DocBlock; query: string }) {
   }
 }
 
-export function DocsArticle({ sections, query }: { sections: DocSection[]; query: string }) {
+export function DocsArticle({
+  page,
+  sections,
+  showIntro,
+  query,
+}: {
+  page: DocPage
+  sections: DocSection[]
+  showIntro: boolean
+  query: string
+}) {
   return (
     <div id="docs-results" className="prose">
+      <h1>{page.title}</h1>
+      {showIntro
+        ? page.intro.map((block, index) => (
+            <Fragment key={`intro-${index}`}>
+              <Block block={block} query={query} />
+            </Fragment>
+          ))
+        : null}
       {sections.map((section) => (
         <section key={section.id} aria-labelledby={`${section.id}-title`} className="docs-section">
           <h2 id={section.id}>

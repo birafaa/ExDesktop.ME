@@ -6,7 +6,13 @@ import IconButton from "@mui/material/IconButton"
 import { useEffect, useMemo, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { DocsArticle } from "../components/docs/DocsArticle.tsx"
-import { docsSections, sectionMatches, sectionToc } from "../content/docs.ts"
+import {
+  docPages,
+  introMatches,
+  pageToc,
+  sectionMatches,
+  type DocPage,
+} from "../content/docs.ts"
 import { ui } from "../content/ui.ts"
 import { usePageTitle } from "../hooks/usePageTitle.ts"
 
@@ -45,30 +51,43 @@ function DocsNav({
   query,
   onChange,
   active,
+  current,
   onNavigate,
 }: {
   searchId: string
   query: string
   onChange: (value: string) => void
   active: string
+  current: DocPage
   onNavigate: (id: string) => void
 }) {
-  const visible = docsSections.filter((section) => sectionMatches(section, query))
   return (
     <>
       <DocsSearch id={searchId} query={query} onChange={onChange} />
       <nav aria-label={ui.docs.sections} className="docs-nav">
-        {visible.map((section) => (
-          <a
-            key={section.id}
-            href={`#${section.id}`}
-            className={active === section.id ? "is-active" : undefined}
-            aria-current={active === section.id ? "location" : undefined}
-            onClick={() => onNavigate(section.id)}
-          >
-            {section.title}
-          </a>
-        ))}
+        {docPages.map((page) => {
+          const sections = page.sections.filter((section) => sectionMatches(section, query))
+          if (query.trim() && sections.length === 0 && !introMatches(page, query)) return null
+          return (
+            <div key={page.id} className="docs-nav-group">
+              <p className="docs-nav-label">{page.group}</p>
+              {page.id !== current.id ? (
+                <a href={page.path}>{page.title}</a>
+              ) : null}
+              {sections.map((section) => (
+                <a
+                  key={section.id}
+                  href={`${page.path}#${section.id}`}
+                  className={page.id === current.id && active === section.id ? "is-active" : undefined}
+                  aria-current={page.id === current.id && active === section.id ? "location" : undefined}
+                  onClick={() => onNavigate(section.id)}
+                >
+                  {section.title}
+                </a>
+              ))}
+            </div>
+          )
+        })}
       </nav>
     </>
   )
@@ -76,22 +95,28 @@ function DocsNav({
 
 export function DocsPage() {
   const location = useLocation()
+  const page = docPages.find((item) => item.path === location.pathname) ?? docPages[0]
   const hashId = location.hash.replace("#", "")
   const [query, setQuery] = useState("")
-  const [active, setActive] = useState(docsSections.some((section) => section.id === hashId) ? hashId : (docsSections[0]?.id ?? ""))
-  const [seenHash, setSeenHash] = useState(hashId)
+  const [active, setActive] = useState(
+    page.sections.some((section) => section.id === hashId) ? hashId : (page.sections[0]?.id ?? ""),
+  )
+  const navKey = `${location.pathname}#${hashId}`
+  const [seenNav, setSeenNav] = useState(navKey)
   const [menuOpen, setMenuOpen] = useState(false)
-  if (seenHash !== hashId) {
-    setSeenHash(hashId)
-    if (docsSections.some((section) => section.id === hashId)) setActive(hashId)
+  if (seenNav !== navKey) {
+    setSeenNav(navKey)
+    if (page.sections.some((section) => section.id === hashId)) setActive(hashId)
+    else setActive(page.sections[0]?.id ?? "")
   }
-  usePageTitle(`${ui.docs.title} — exDesktop`)
+  usePageTitle(`${page.title} — exDesktop`)
 
   const visible = useMemo(
-    () => docsSections.filter((section) => sectionMatches(section, query)),
-    [query],
+    () => page.sections.filter((section) => sectionMatches(section, query)),
+    [page, query],
   )
-  const toc = visible.flatMap((section) => sectionToc(section))
+  const showIntro = introMatches(page, query)
+  const toc = pageToc(page, visible, showIntro)
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -133,7 +158,6 @@ export function DocsPage() {
   return (
     <div className="wrap docs-page">
       <header className="docs-intro">
-        <h1>{ui.docs.title}</h1>
         <Button className="docs-menu-btn" variant="outlined" onClick={() => setMenuOpen(true)}>
           {ui.docs.openSections}
         </Button>
@@ -153,6 +177,7 @@ export function DocsPage() {
             query={query}
             onChange={setQuery}
             active={active}
+            current={page}
             onNavigate={setActive}
           />
         </aside>
@@ -166,7 +191,9 @@ export function DocsPage() {
               ))}
             </nav>
           ) : null}
-          {visible.length > 0 ? <DocsArticle sections={visible} query={query} /> : null}
+          {visible.length > 0 || showIntro ? (
+            <DocsArticle page={page} sections={visible} showIntro={showIntro} query={query} />
+          ) : null}
         </article>
         <aside className="docs-toc docs-toc--side">
           <nav aria-label={ui.docs.toc}>
@@ -210,6 +237,7 @@ export function DocsPage() {
           query={query}
           onChange={setQuery}
           active={active}
+          current={page}
           onNavigate={(id) => {
             setActive(id)
             setMenuOpen(false)
