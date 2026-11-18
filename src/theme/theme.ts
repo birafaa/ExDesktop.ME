@@ -63,7 +63,7 @@ export function createAppTheme(mode: "light" | "dark", reducedMotion: boolean) {
             backgroundColor: "var(--primary)",
             color: "var(--on-primary)",
             "&:hover": {
-              backgroundColor: "color-mix(in srgb, var(--primary) 86%, #000)",
+              backgroundColor: "var(--primary-hover)",
               boxShadow: "none",
             },
           },

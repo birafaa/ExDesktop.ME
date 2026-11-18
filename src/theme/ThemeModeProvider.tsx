@@ -40,7 +40,7 @@ export function ThemeModeProvider({ children }: { children: ReactNode }) {
     document.documentElement.dataset.theme = mode
     document.documentElement.style.colorScheme = mode
     const meta = document.querySelector('meta[name="theme-color"]')
-    if (meta) meta.setAttribute("content", mode === "dark" ? "#12110F" : "#F4F1EB")
+    if (meta) meta.setAttribute("content", mode === "dark" ? "#1A1110" : "#FFF8F6")
   }, [mode])
 
   const toggle = (origin?: { x: number; y: number }) => {
