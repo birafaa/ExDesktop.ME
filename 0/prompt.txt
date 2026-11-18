@@ -1,0 +1,1 @@
+Rebuild the real exDesktop documentation from https://exdesktop.xyz/docs/ inside the existing docs page, keeping the authors' wording.

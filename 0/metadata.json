@@ -1,0 +1,35 @@
+{
+  "cli_version": "0.13.4",
+  "checkpoint_id": "01M7QYSMXY8M8H51PAVP2B1XMT",
+  "session_id": "bc-e0843b9d-c98f-5c0a-9dc6-17f722438b29",
+  "strategy": "manual-commit",
+  "created_at": "2026-11-18T18:30:37.900005667Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "public/docs/ai/exdesktop-plugins/SKILL.md",
+    "public/docs/ai/prompt.md",
+    "src/content/docs/ai.json",
+    "src/content/docs/sdk.json"
+  ],
+  "agent": "Cursor",
+  "model": "grok-4.7",
+  "turn_id": "f891859bcef6",
+  "checkpoint_transcript_start": 2,
+  "transcript_lines_at_start": 2,
+  "compact_transcript_start": 2,
+  "redaction": {
+    "replacements": 0,
+    "layers": {
+      "betterleaks": 0,
+      "connection_string": 0,
+      "credential_key": 0,
+      "credential_value": 0,
+      "credentialed_uri": 0,
+      "entropy": 0,
+      "key_context": 0,
+      "provider_token": 0,
+      "shell_stdin": 0
+    }
+  }
+}
