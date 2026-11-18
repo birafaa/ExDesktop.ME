@@ -187,8 +187,13 @@ a {
 }
 
 .logo {
-  color: var(--primary);
+  display: block;
   flex: none;
+  max-width: none;
+}
+
+.hero__copy .logo {
+  margin-bottom: 16px;
 }
 
 .nav-desktop {
