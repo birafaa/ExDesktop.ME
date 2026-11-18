@@ -4,6 +4,7 @@ import "@fontsource-variable/manrope/wght.css"
 import "@fontsource-variable/unbounded/wght.css"
 import "./styles/global.css"
 import "./styles/mock.css"
+import "./styles/install.css"
 import App from "./App.tsx"
 
 createRoot(document.getElementById("root")!).render(

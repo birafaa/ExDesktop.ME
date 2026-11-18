@@ -13,6 +13,7 @@ import { Logo } from "../brand/Logo.tsx"
 
 const internal = [
   { to: "/", label: ui.nav.home, end: true },
+  { to: "/install", label: ui.nav.install, end: true },
   { to: "/docs", label: ui.nav.docs, end: false },
 ]
 

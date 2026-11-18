@@ -23,9 +23,8 @@ export function Hero() {
           <div className="hero__actions">
             <Button
               variant="contained"
-              href={site.windows.href}
-              target="_blank"
-              rel="noreferrer"
+              component={Link}
+              to="/install"
               startIcon={<DownloadOutlinedIcon />}
             >
               {ui.actions.download}

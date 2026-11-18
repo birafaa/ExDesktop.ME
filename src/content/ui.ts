@@ -8,6 +8,7 @@ export const ui = {
     mobile: "Меню",
     footer: "Ссылки в подвале",
     home: "Главная",
+    install: "Установка",
     docs: "Документация",
     github: "GitHub",
     telegram: "Канал",
