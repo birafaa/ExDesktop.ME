@@ -113,11 +113,6 @@ export function DocsPage() {
   }, [])
 
   useEffect(() => {
-    if (!hashId) return
-    document.getElementById(hashId)?.scrollIntoView()
-  }, [hashId])
-
-  useEffect(() => {
     const nodes = visible
       .map((section) => document.getElementById(section.id))
       .filter((node): node is HTMLElement => node instanceof HTMLElement)

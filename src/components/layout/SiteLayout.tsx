@@ -9,7 +9,11 @@ export function SiteLayout() {
   const mainRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    mainRef.current?.focus()
+    const id = window.location.hash.replace("#", "")
+    const target = id ? document.getElementById(id) : null
+    if (target) target.scrollIntoView()
+    else window.scrollTo(0, 0)
+    mainRef.current?.focus({ preventScroll: true })
   }, [pathname])
 
   return (

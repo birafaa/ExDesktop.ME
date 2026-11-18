@@ -59,6 +59,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 html,
@@ -235,7 +236,7 @@ a {
   margin-right: 0;
 }
 
-.burger {
+.MuiIconButton-root.burger {
   display: inline-flex;
 }
 
@@ -1001,7 +1002,7 @@ mark {
     display: flex;
   }
 
-  .burger {
+  .MuiIconButton-root.burger {
     display: none;
   }
 
@@ -1049,7 +1050,7 @@ mark {
   }
 
   .docs-search-mobile,
-  .docs-menu-btn {
+  .docs-menu-btn.MuiButton-root {
     display: none;
   }
 }

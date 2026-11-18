@@ -58,7 +58,7 @@
 .mock__body {
   display: grid;
   grid-template-columns: 232px minmax(0, 1fr);
-  min-height: 460px;
+  min-height: 392px;
 }
 
 .mock__list,
@@ -147,14 +147,18 @@
 }
 
 .mock__name {
+  overflow: hidden;
   font-size: 0.92rem;
   font-weight: 800;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .mock__time {
   color: var(--ink-muted);
   font-size: 0.75rem;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .mock__chat.is-active .mock__time {
@@ -169,6 +173,10 @@
   border-radius: 99px;
   background: currentColor;
   opacity: 0.38;
+}
+
+.mock__line--short {
+  width: 62%;
 }
 
 .mock__bar {
@@ -225,17 +233,18 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  max-width: 78%;
-  padding: 10px 12px;
+  padding: 12px 14px;
 }
 
 .mock__bubble--in {
+  width: min(78%, 320px);
   border-radius: 18px 18px 18px 6px;
   background: var(--surface-high);
 }
 
 .mock__bubble--out {
   align-self: flex-end;
+  width: min(62%, 240px);
   border-radius: 18px 18px 6px 18px;
   background: var(--primary);
   color: var(--on-primary);

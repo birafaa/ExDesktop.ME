@@ -50,14 +50,14 @@ export function DesktopMock({ layout = "split" }: { layout?: MockLayoutId }) {
           <div className="mock__stream">
             <div className="mock__date">сегодня</div>
             <div className="mock__bubble mock__bubble--in">
-              <span className="mock__line" style={{ width: "92%" }} />
-              <span className="mock__line" style={{ width: "61%" }} />
+              <span className="mock__line" />
+              <span className="mock__line mock__line--short" />
             </div>
             <div className="mock__bubble mock__bubble--in">
-              <span className="mock__line" style={{ width: "46%" }} />
+              <span className="mock__line mock__line--short" />
             </div>
             <div className="mock__bubble mock__bubble--out">
-              <span className="mock__line" style={{ width: "74%" }} />
+              <span className="mock__line" />
             </div>
           </div>
           <div className="mock__composer">
