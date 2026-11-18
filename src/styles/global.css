@@ -448,15 +448,16 @@ a {
 
 .passport__facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
-  gap: 16px 20px;
+  gap: 14px;
   margin: 0;
   align-content: end;
 }
 
 .passport__facts div {
   display: grid;
-  gap: 4px;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 8px 16px;
+  align-items: baseline;
 }
 
 .passport__facts dt {
@@ -468,7 +469,14 @@ a {
 .passport__facts dd {
   margin: 0;
   font-weight: 800;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 560px) {
+  .passport__facts div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
