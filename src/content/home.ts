@@ -4,11 +4,6 @@ export const home = {
   hero: {
     extra: "[Текст: дополнительная строка героя — напиши сам]",
   },
-  passport: {
-    id: "passport",
-    title: "Паспорт сборки",
-    note: "[Текст: примечание к сборке — напиши сам]",
-  },
   links: {
     id: "links",
     title: "Ссылки",
