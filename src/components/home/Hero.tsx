@@ -15,12 +15,6 @@ export function Hero() {
       <section className="hero section" aria-labelledby="hero-title">
         <div className="wrap hero__copy">
           <Logo size={72} />
-          <p className="chip">
-            <span translate="no">{site.version}</span>
-            <a href={site.licenseUrl} target="_blank" rel="noreferrer">
-              {site.license}
-            </a>
-          </p>
           <h1 id="hero-title" translate="no">
             {site.name}
           </h1>
