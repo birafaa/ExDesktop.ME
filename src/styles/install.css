@@ -1,5 +1,5 @@
 .install-page {
-  padding: 36px 0 56px;
+  padding: var(--section-y) 0;
 }
 
 .install-page__intro h1 {
