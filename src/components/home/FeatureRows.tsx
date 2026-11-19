@@ -1,5 +1,6 @@
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome"
 import CheckIcon from "@mui/icons-material/Check"
+import ExtensionIcon from "@mui/icons-material/Extension"
 import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined"
@@ -78,24 +79,27 @@ function PluginsVignette() {
 function PortVignette() {
   return (
     <div className="vignette vignette--port" aria-hidden="true">
-      <div className="port-board">
-        <div className="vig-plugin">
-          <img className="extera-mark" src="/icons/exteragram.webp" alt="" width={40} height={40} />
+      <div className="port-stage">
+        <div className="port-end">
+          <span className="port-app">
+            <img className="extera-mark" src="/icons/exteragram.webp" alt="" width={44} height={44} />
+          </span>
           <b translate="no">exteraGram</b>
         </div>
-        <div className="port-lane">
-          <span className="vig-track">
-            <i />
+        <div className="port-gap" />
+        <div className="port-end">
+          <span className="port-app">
+            <Logo size={44} />
+            <CheckIcon className="vig-check" fontSize="inherit" />
           </span>
-          <span className="vig-mover">
-            <img className="extera-mark" src="/icons/exteragram.webp" alt="" width={36} height={36} />
-          </span>
-        </div>
-        <div className="vig-plugin vig-plugin--dest">
-          <Logo size={26} />
           <b translate="no">exDesktop</b>
-          <CheckIcon className="vig-check" fontSize="inherit" />
         </div>
+        <span className="vig-track">
+          <i />
+        </span>
+        <span className="vig-mover">
+          <ExtensionIcon fontSize="inherit" />
+        </span>
       </div>
       <span className="vig-port">
         <AutoAwesomeIcon className="vig-spark" fontSize="small" />

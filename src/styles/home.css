@@ -361,61 +361,61 @@
 }
 
 .vignette--port {
-  gap: 10px;
+  align-content: center;
   justify-items: center;
+  min-height: 0;
+  gap: 16px;
 }
 
-.port-board {
+.port-stage {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(44px, 0.7fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 8px;
+  grid-template-columns: minmax(0, 1fr) minmax(72px, 0.9fr) minmax(0, 1fr);
+  align-items: start;
   width: 100%;
+  container-type: inline-size;
+  --side: calc(100cqi * 1 / 2.9);
 }
 
-.vig-plugin {
+.port-end {
   display: grid;
   justify-items: center;
-  gap: 4px;
+  align-content: start;
+  gap: 10px;
   min-width: 0;
-  padding: 8px 6px;
-  text-align: center;
 }
 
-.extera-mark {
+.port-app {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+
+.port-app .extera-mark,
+.port-app .logo {
   display: block;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
   object-fit: cover;
 }
 
-.vig-mover .extera-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-}
-
-.vig-plugin b {
+.port-end b {
   display: block;
   max-width: 100%;
   overflow: hidden;
   font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.port-lane {
-  position: relative;
-  height: 36px;
-  container-type: inline-size;
-}
-
 .vig-track {
   position: absolute;
-  top: 16px;
-  right: 0;
-  left: 0;
+  top: 20px;
+  right: calc(var(--side) / 2 + 22px);
+  left: calc(var(--side) / 2 + 22px);
   height: 4px;
   overflow: hidden;
   border-radius: 99px;
@@ -434,18 +434,30 @@
 
 .vig-mover {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 6px;
+  left: calc(var(--side) / 2 - 16px);
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
-  background: var(--primary-container);
-  color: var(--on-primary-container);
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.vig-mover .MuiSvgIcon-root {
+  font-size: 18px;
 }
 
 .vig-check {
+  position: absolute;
+  right: -6px;
+  bottom: -4px;
+  width: 18px;
+  height: 18px;
+  padding: 1px;
+  border-radius: 50%;
+  background: var(--surface);
   color: var(--status);
   opacity: 0;
 }
@@ -890,7 +902,7 @@ html.no-scroll-timeline .vig-track i {
 }
 
 html.no-scroll-timeline .vig-mover {
-  transform: translateX(calc((100cqi - 36px) * clamp(0, (var(--p) - 0.16) * 1.8, 1)));
+  transform: translateX(calc((100cqi - var(--side, 34.5%)) * clamp(0, (var(--p) - 0.16) * 1.8, 1)));
 }
 
 html.no-scroll-timeline .vig-check,
@@ -932,7 +944,7 @@ html.no-scroll-timeline .ok-dot {
   }
 
   .vig-mover {
-    transform: translateX(calc(100cqi - 36px));
+    transform: translateX(calc(100cqi - var(--side, 34.5%)));
   }
 
   .vig-check,
@@ -1027,10 +1039,10 @@ html.no-scroll-timeline .ok-dot {
 
 @keyframes chip-travel {
   from {
-    transform: translateX(-30px);
+    transform: translateX(0);
   }
   to {
-    transform: translateX(calc(100cqi - 8px));
+    transform: translateX(calc(100cqi - var(--side, 34.5%)));
   }
 }
 
