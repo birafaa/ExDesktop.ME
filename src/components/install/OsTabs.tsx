@@ -2,6 +2,7 @@ import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows"
 import LaptopMacIcon from "@mui/icons-material/LaptopMac"
 import TerminalIcon from "@mui/icons-material/Terminal"
 import type { SvgIconComponent } from "@mui/icons-material"
+import type { CSSProperties } from "react"
 import { install, type OsId } from "../../content/install.ts"
 
 const order: OsId[] = ["windows", "linux", "macos"]
@@ -22,7 +23,13 @@ export function OsTabs({
   label: string
 }) {
   return (
-    <div className="os-cards" role="radiogroup" aria-label={label}>
+    <div
+      className="os-cards"
+      role="radiogroup"
+      aria-label={label}
+      style={{ "--os-index": order.indexOf(os) } as CSSProperties}
+    >
+      <span className="os-cards__indicator" aria-hidden="true" />
       {order.map((id) => {
         const Icon = icons[id]
         const selected = os === id

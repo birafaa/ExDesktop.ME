@@ -6,7 +6,7 @@ import { site } from "../../content/site.ts"
 export function InstallAction({ os }: { os: OsId }) {
   if (os === "windows") {
     return (
-      <div className="install-action">
+      <div className="install-action" key={os}>
         <a className="install-go" href={site.windows.href}>
           <DownloadOutlinedIcon />
           {install.download}
@@ -19,7 +19,7 @@ export function InstallAction({ os }: { os: OsId }) {
   }
 
   return (
-    <div className="install-action">
+    <div className="install-action" key={os}>
       <div className="install-command__row">
         <code translate="no">{site.installCommand}</code>
         <CopyButton text={site.installCommand} />
