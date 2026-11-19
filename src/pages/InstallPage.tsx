@@ -1,7 +1,7 @@
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined"
 import Button from "@mui/material/Button"
-import { useState, type CSSProperties } from "react"
-import { Link } from "react-router-dom"
+import { type CSSProperties } from "react"
+import { Link, useSearchParams } from "react-router-dom"
 import { CopyButton } from "../components/CopyButton.tsx"
 import { install, type OsId } from "../content/install.ts"
 import { site } from "../content/site.ts"
@@ -15,6 +15,11 @@ function detectOs(): OsId | null {
   if (/Windows/i.test(ua)) return "windows"
   if (/Macintosh|Mac OS X/i.test(ua)) return "macos"
   if (/Linux/i.test(ua) && !/Android/i.test(ua)) return "linux"
+  return null
+}
+
+function osFromQuery(value: string | null): OsId | null {
+  if (value === "windows" || value === "linux" || value === "macos") return value
   return null
 }
 
@@ -42,9 +47,14 @@ function Steps({ os }: { os: OsId }) {
 
 export function InstallPage() {
   usePageTitle(`${install.title} — ${site.name}`)
+  const [params, setParams] = useSearchParams()
+  const queried = osFromQuery(params.get("os"))
   const detected = detectOs()
-  const [os, setOs] = useState<OsId>(detected ?? "windows")
+  const os = queried ?? detected ?? "windows"
   const system = install.systems[os]
+  function choose(next: OsId) {
+    setParams({ os: next }, { replace: true })
+  }
 
   return (
     <article className="install-page">
@@ -62,13 +72,13 @@ export function InstallPage() {
               role="radio"
               aria-checked={os === id}
               className={os === id ? "os-picker__btn is-selected" : "os-picker__btn"}
-              onClick={() => setOs(id)}
+              onClick={() => choose(id)}
             >
               {install.systems[id].label}
             </button>
           ))}
         </div>
-        {detected && os === detected ? <p className="install-note">{install.detected}</p> : null}
+        {!queried && detected && os === detected ? <p className="install-note">{install.detected}</p> : null}
 
         <Steps key={os} os={os} />
 

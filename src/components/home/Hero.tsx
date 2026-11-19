@@ -67,8 +67,16 @@ export function Hero() {
             </Button>
           </div>
           <ul className="platform-row">
-            {site.platforms.map((name) => (
-              <li key={name}>{name}</li>
+            {(
+              [
+                ["Windows", "windows"],
+                ["Linux", "linux"],
+                ["macOS", "macos"],
+              ] as const
+            ).map(([label, id]) => (
+              <li key={id}>
+                <Link to={`/install?os=${id}`}>{label}</Link>
+              </li>
             ))}
           </ul>
         </div>
