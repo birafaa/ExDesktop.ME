@@ -25,9 +25,9 @@
 }
 
 .hero__shape--b {
-  right: -60px;
+  right: 0;
   bottom: 8%;
-  width: 200px;
+  width: min(200px, 42vw);
   height: 150px;
   border-radius: 72px 40px 80px 36px;
   background: var(--surface-container);
@@ -144,10 +144,10 @@
   display: block;
   position: absolute;
   top: 20px;
-  right: 0;
+  right: 16px;
   z-index: 0;
-  width: min(420px, 72%);
-  transform: translate(var(--px, 0px), var(--py, 0px)) rotate(4deg);
+  width: min(420px, 68%);
+  transform: translate(var(--px, 0px), var(--py, 0px)) rotate(-4deg);
   transform-origin: right top;
   pointer-events: none;
 }
@@ -167,9 +167,9 @@
   }
 
   .preview .hero__back {
-    top: 16px;
-    right: 8px;
-    width: min(460px, 48%);
+    top: 24px;
+    right: 20px;
+    width: min(440px, 46%);
   }
 
   .preview .hero__front {
@@ -183,9 +183,10 @@
   }
 
   .preview .hero__back {
-    top: 8px;
-    width: min(230px, 64%);
-    transform: translate(var(--px, 0px), var(--py, 0px)) rotate(3deg) scale(0.92);
+    top: 12px;
+    right: 14px;
+    width: min(188px, 54%);
+    transform: translate(var(--px, 0px), var(--py, 0px)) rotate(-3deg) scale(0.84);
   }
 
   .preview .hero__front {
