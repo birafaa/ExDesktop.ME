@@ -60,7 +60,7 @@
 
 .channel-row {
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr) auto;
+  grid-template-columns: 36px minmax(0, 1fr);
   gap: 8px;
   align-items: center;
   margin-bottom: 4px;
@@ -92,8 +92,7 @@
   gap: 6px;
 }
 
-.channel-row__lines i,
-.channel-bubble.is-skeleton i {
+.channel-row__lines i {
   display: block;
   height: 8px;
   border-radius: 99px;
@@ -107,12 +106,6 @@
 
 .channel-row__lines i:last-child {
   width: 46%;
-}
-
-.channel-row__time {
-  color: var(--ink-muted);
-  font-size: 0.72rem;
-  font-weight: 700;
 }
 
 .channel-main {
@@ -149,82 +142,48 @@
 }
 
 .channel-bubble {
-  width: min(100%, 640px);
-  padding: 12px 14px;
-  border-radius: 18px 18px 18px 6px;
+  display: grid;
+  gap: 10px;
+  width: min(100%, 560px);
+  padding: 16px 16px 14px;
+  border-radius: 20px 20px 20px 8px;
   background: var(--surface);
   box-shadow: 0 1px 0 var(--outline-variant);
+  animation: bubble-in 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(160ms + var(--i) * 90ms);
 }
 
-.channel-bubble img {
+.channel-bubble i {
   display: block;
-  width: 100%;
-  max-height: 180px;
-  margin-bottom: 8px;
-  object-fit: cover;
-  border-radius: 12px;
+  width: var(--w, 70%);
+  height: 9px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--ink) 16%, transparent);
 }
 
-.channel-bubble__text {
-  margin: 0;
-  white-space: pre-wrap;
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
-}
-
-.channel-bubble__text a {
-  overflow-wrap: anywhere;
-}
-
-.channel-react,
-.channel-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin: 8px 0 0;
-}
-
-.channel-react span {
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: var(--surface-container);
-  font-size: 0.82rem;
-}
-
-.channel-meta {
-  color: var(--ink-muted);
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.channel-meta a {
-  color: inherit;
-}
-
-.channel-bubble.is-skeleton {
-  display: grid;
-  gap: 8px;
-}
-
-.channel-bubble.is-skeleton i:nth-child(1) {
-  width: 92%;
-}
-
-.channel-bubble.is-skeleton i:nth-child(2) {
-  width: 74%;
-}
-
-.channel-bubble.is-skeleton i:nth-child(3) {
-  width: 40%;
+.channel-ph {
+  display: block;
+  height: 112px;
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--primary) 28%, var(--surface-container)), var(--surface-container));
 }
 
 @keyframes channel-in {
   from {
     opacity: 0;
     transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;

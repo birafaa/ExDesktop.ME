@@ -4,9 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "fetch:channel": "node scripts/fetch-channel.mjs",
-    "predev": "node scripts/fetch-channel.mjs",
-    "prebuild": "node scripts/fetch-channel.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
