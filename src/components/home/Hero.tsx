@@ -7,13 +7,14 @@ import { home } from "../../content/home.ts"
 import { site } from "../../content/site.ts"
 import { ui } from "../../content/ui.ts"
 import { Logo } from "../brand/Logo.tsx"
-import { DesktopMock } from "./DesktopMock.tsx"
+import { ChannelWindow } from "./ChannelWindow.tsx"
 
 export function Hero() {
   return (
     <>
       <section className="hero section" aria-labelledby="hero-title">
-        <div className="wrap hero__copy">
+        <div className="wrap">
+        <div className="hero__copy">
           <Logo size={72} />
           <h1 id="hero-title" translate="no">
             {site.name}
@@ -54,11 +55,9 @@ export function Hero() {
             ))}
           </ul>
         </div>
-      </section>
-      <section className="preview" aria-label={ui.preview.label}>
-        <div className="wrap preview__frame">
-          <div className="blob" />
-          <DesktopMock />
+        <div className="hero__window">
+          <ChannelWindow />
+        </div>
         </div>
       </section>
     </>

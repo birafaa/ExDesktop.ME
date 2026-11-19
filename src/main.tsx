@@ -3,10 +3,9 @@ import { createRoot } from "react-dom/client"
 import "@fontsource-variable/manrope/wght.css"
 import "@fontsource-variable/unbounded/wght.css"
 import "./styles/global.css"
-import "./styles/mock.css"
 import "./styles/install.css"
 import "./styles/home-sections.css"
-import "./styles/showcase.css"
+import "./styles/channel.css"
 import App from "./App.tsx"
 
 createRoot(document.getElementById("root")!).render(

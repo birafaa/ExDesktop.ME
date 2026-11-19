@@ -29,9 +29,6 @@ export const ui = {
     copyFailed: "Не удалось скопировать",
     home: "На главную",
   },
-  preview: {
-    label: "Схематичное окно клиента",
-  },
   docs: {
     title: "Документация",
     sections: "Разделы",
