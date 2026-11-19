@@ -8,25 +8,25 @@ export const install = {
     windows: {
       label: "Windows",
       steps: [
-        { title: "Скачайте файл", description: "[описание шага]" },
-        { title: "Запустите установщик", description: "[описание шага]" },
-        { title: "Откройте exDesktop", description: "[описание шага]" },
+        { title: "Скачайте файл" },
+        { title: "Запустите установщик" },
+        { title: "Откройте exDesktop" },
       ],
     },
     linux: {
       label: "Linux",
       steps: [
-        { title: "Откройте терминал", description: "[описание шага]" },
-        { title: "Вставьте команду", description: "[описание шага]" },
-        { title: "Запустите exdesktop", description: "[описание шага]" },
+        { title: "Откройте терминал" },
+        { title: "Вставьте команду" },
+        { title: "Запустите exdesktop" },
       ],
     },
     macos: {
       label: "macOS",
       steps: [
-        { title: "Откройте Терминал", description: "[описание шага]" },
-        { title: "Вставьте команду", description: "[описание шага]" },
-        { title: "Откройте exDesktop", description: "[описание шага]" },
+        { title: "Откройте Терминал" },
+        { title: "Вставьте команду" },
+        { title: "Откройте exDesktop" },
       ],
     },
   },

@@ -115,13 +115,10 @@ export function InstallStage({ os }: { os: OsId }) {
                     <span className="install-steps__n" aria-hidden="true">
                       {stepIndex + 1}
                     </span>
-                    <div className="install-steps__body">
-                      <span className="install-steps__title">
-                        <Icon aria-hidden="true" />
-                        {step.title}
-                      </span>
-                      <p>{step.description}</p>
-                    </div>
+                    <span className="install-steps__title">
+                      <Icon aria-hidden="true" />
+                      {step.title}
+                    </span>
                   </li>
                 )
               })}

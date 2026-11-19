@@ -301,9 +301,10 @@
   position: relative;
   display: grid;
   grid-template-columns: 40px minmax(0, 1fr);
-  column-gap: 16px;
-  align-items: start;
-  padding-bottom: 22px;
+  column-gap: 14px;
+  align-items: center;
+  min-height: 40px;
+  padding-bottom: 14px;
   color: var(--ink);
 }
 
@@ -339,17 +340,11 @@
   font-weight: 800;
 }
 
-.install-steps__body {
-  display: grid;
-  gap: 4px;
-  min-width: 0;
-  padding-top: 6px;
-}
-
 .install-steps__title {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
   font-weight: 800;
 }
 
@@ -357,14 +352,6 @@
   flex: none;
   color: var(--primary);
   font-size: 22px;
-}
-
-.install-steps__body p {
-  margin: 0;
-  color: var(--ink-muted);
-  font-size: 0.95rem;
-  font-weight: 650;
-  line-height: 1.45;
 }
 
 @media (prefers-reduced-motion: no-preference) {
