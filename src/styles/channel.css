@@ -163,10 +163,22 @@
 
 .channel-ph {
   display: block;
+  position: relative;
   height: 112px;
+  overflow: hidden;
   border-radius: 14px;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--primary) 28%, var(--surface-container)), var(--surface-container));
+  background: var(--surface-container);
+}
+
+.channel-ph::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 38%;
+  height: 36%;
+  border-radius: 12px 18px 10px 16px;
+  background: var(--primary-container);
 }
 
 @keyframes channel-in {
@@ -196,7 +208,7 @@
   border: 1px solid var(--outline-variant);
   border-radius: 22px;
   background: color-mix(in srgb, var(--surface) 94%, transparent);
-  box-shadow: 0 28px 60px rgb(35 25 24 / 22%);
+  box-shadow: var(--shadow-peek);
 }
 
 .peek__bar {
@@ -308,19 +320,35 @@
 }
 
 .peek__tile[data-tone="violet"] {
-  --tone: #7a4dff;
+  --tone: var(--tone-violet);
 }
 
 .peek__tile[data-tone="blue"] {
-  --tone: #2f6fed;
+  --tone: var(--tone-blue);
+}
+
+.peek__tile[data-tone="teal"] {
+  --tone: var(--tone-teal);
+}
+
+.peek__tile[data-tone="indigo"] {
+  --tone: var(--tone-indigo);
 }
 
 .peek__tile[data-tone="pink"] {
-  --tone: #d63d78;
+  --tone: var(--tone-pink);
 }
 
 .peek__tile[data-tone="orange"] {
   --tone: var(--primary);
+}
+
+.peek__tile[data-tone="green"] {
+  --tone: var(--tone-green);
+}
+
+.peek__tile[data-tone="red"] {
+  --tone: var(--tone-red);
 }
 
 @media (min-width: 980px) {

@@ -1,38 +1,19 @@
-/**
- * Тональная палитра Material 3 от оранжевого exdesktop.xyz (`--brand: #EA5846`).
- * Primary зафиксирован на этом цвете. Остальные роли — tonal spot, hue 27.
- * Hex совпадают с переменными в src/styles/global.css.
- */
+/** Роли темы читают токены из src/styles/tokens.css. */
 export const lightColors = {
-  bg: "#FFF8F6",
-  surface: "#FFFFFF",
-  ink: "#231918",
-  inkMuted: "#534341",
-  primary: "#EA5846",
-  onPrimary: "#FFFFFF",
-  primaryContainer: "#FFDAD5",
-  onPrimaryContainer: "#73342B",
-  secondary: "#775651",
-  onSecondary: "#FFFFFF",
-  secondaryContainer: "#FFDAD5",
-  onSecondaryContainer: "#5D3F3B",
-  outline: "#857370",
-  outlineVariant: "#D8C2BE",
+  bg: "var(--bg)",
+  surface: "var(--surface)",
+  ink: "var(--ink)",
+  inkMuted: "var(--ink-muted)",
+  primary: "var(--primary)",
+  onPrimary: "var(--on-primary)",
+  primaryContainer: "var(--primary-container)",
+  onPrimaryContainer: "var(--on-primary-container)",
+  secondary: "var(--secondary)",
+  onSecondary: "var(--on-primary)",
+  secondaryContainer: "var(--secondary-container)",
+  onSecondaryContainer: "var(--on-secondary-container)",
+  outline: "var(--outline)",
+  outlineVariant: "var(--outline-variant)",
 } as const
 
-export const darkColors = {
-  bg: "#1A1110",
-  surface: "#231918",
-  ink: "#F1DFDC",
-  inkMuted: "#D8C2BE",
-  primary: "#EA5846",
-  onPrimary: "#FFFFFF",
-  primaryContainer: "#73342B",
-  onPrimaryContainer: "#FFDAD5",
-  secondary: "#E7BDB6",
-  onSecondary: "#442925",
-  secondaryContainer: "#5D3F3B",
-  onSecondaryContainer: "#FFDAD5",
-  outline: "#A08C89",
-  outlineVariant: "#534341",
-} as const
+export const darkColors = lightColors
