@@ -32,7 +32,7 @@ function useCardMotion<T extends HTMLElement>() {
         if (entry.isIntersecting) setEntered(true)
         setLive(entry.isIntersecting)
       },
-      { threshold: 0.4 },
+      { threshold: 0.2 },
     )
     observer.observe(node)
     return () => observer.disconnect()
@@ -167,7 +167,7 @@ const views = {
   Среда: SandboxVignette,
 } as const
 
-function Card({
+function Feature({
   title,
   body,
   index,
@@ -178,15 +178,16 @@ function Card({
 }) {
   const { ref, entered, live } = useCardMotion<HTMLElement>()
   const View = views[title]
-  const classes = ["diff-card", entered ? "is-in" : "", live ? "is-live" : ""].filter(Boolean).join(" ")
+  const classes = ["diff-row", entered ? "is-in" : "", live ? "is-live" : ""].filter(Boolean).join(" ")
   return (
     <article ref={ref} className={classes} style={{ "--i": index } as CSSProperties}>
-      <div className="diff-stage">
-        <View />
-      </div>
       <div className="diff-copy">
+        <span className="diff-index">{String(index + 1).padStart(2, "0")}</span>
         <h3>{title}</h3>
         <p>{body}</p>
+      </div>
+      <div className="diff-panel">
+        <View />
       </div>
     </article>
   )
@@ -198,9 +199,9 @@ export function FeatureRows() {
     <section className="section features" aria-labelledby="difference-title">
       <div className="wrap">
         <SectionHeading id={block.id} titleId="difference-title" title={block.title} />
-        <div className="diff-grid">
+        <div className="diff-list">
           {block.items.map((item, index) => (
-            <Card key={item.title} title={item.title} body={item.body} index={index} />
+            <Feature key={item.title} title={item.title} body={item.body} index={index} />
           ))}
         </div>
       </div>

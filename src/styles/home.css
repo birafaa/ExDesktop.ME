@@ -209,63 +209,79 @@
   }
 }
 
-.diff-grid {
-  display: grid;
-  gap: 16px;
-  align-items: stretch;
+.features .section-head {
+  margin-bottom: 56px;
 }
 
-.diff-card {
+.diff-list {
   display: grid;
-  grid-template-rows: var(--stage) minmax(7.6rem, auto);
+  gap: 88px;
+}
+
+.diff-row {
+  display: grid;
+  gap: 28px;
   min-width: 0;
-  height: 100%;
-  padding: 12px;
-  border: 1px solid var(--outline-variant);
-  border-radius: 28px;
-  background: var(--surface);
-  --stage: 320px;
-}
-
-.diff-stage {
-  display: grid;
-  place-items: center;
-  height: var(--stage);
-  padding: 12px;
-  overflow: hidden;
-  border-radius: 18px;
-  background: var(--surface-low);
+  --from: 0px;
 }
 
 .diff-copy {
-  min-height: 7.8rem;
-  padding: 14px 8px 6px;
+  max-width: 40ch;
+}
+
+.diff-index {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
 }
 
 .diff-copy h3 {
   margin: 0;
   font-family: "Unbounded Variable", Unbounded, sans-serif;
-  font-size: 1.45rem;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
+  font-size: clamp(2.1rem, 4vw, 3.3rem);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
 }
 
 .diff-copy p {
-  margin: 8px 0 0;
+  margin: 14px 0 0;
   color: var(--ink-muted);
+  font-size: 1.125rem;
+  line-height: 1.55;
   white-space: pre-line;
 }
 
+.diff-panel {
+  position: relative;
+  min-width: 0;
+}
+
+.diff-panel::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 8% 6%;
+  border-radius: 40%;
+  background: var(--primary-container);
+  filter: blur(36px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
 .vignette {
+  position: relative;
+  z-index: 1;
   display: grid;
   align-content: center;
   width: 100%;
-  height: 100%;
   min-width: 0;
-  padding: 10px;
-  border: 1px solid var(--outline-variant);
-  border-radius: 16px;
+  padding: 20px;
+  border-radius: 24px;
   background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
 .vig-badge {
@@ -277,13 +293,13 @@
   border-radius: 999px;
   background: var(--primary-container);
   color: var(--on-primary-container);
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 800;
 }
 
 .vig-list {
   display: grid;
-  gap: 8px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -294,9 +310,9 @@
 .vig-sandbox {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   min-width: 0;
-  padding: 8px;
+  padding: 12px;
   border-radius: 16px;
   background: var(--surface-low);
 }
@@ -305,9 +321,9 @@
   display: grid;
   flex: none;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   background: color-mix(in srgb, var(--tone, var(--primary)) 18%, var(--surface));
   color: var(--tone, var(--primary));
 }
@@ -339,7 +355,7 @@
 .vig-lines i,
 .vig-plugin i {
   display: block;
-  height: 8px;
+  height: 10px;
   border-radius: 99px;
   background: color-mix(in srgb, var(--ink) 16%, transparent);
 }
@@ -358,9 +374,9 @@
   display: flex;
   flex: none;
   align-items: center;
-  width: 40px;
-  height: 22px;
-  padding: 2px;
+  width: 48px;
+  height: 28px;
+  padding: 3px;
   border-radius: 99px;
   background: var(--surface-highest);
 }
@@ -376,8 +392,8 @@
 .vig-switch i {
   position: relative;
   z-index: 1;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--surface);
   box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 25%, transparent);
@@ -409,20 +425,20 @@
   display: block;
   max-width: 100%;
   overflow: hidden;
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .port-lane {
   position: relative;
-  height: 28px;
+  height: 36px;
   container-type: inline-size;
 }
 
 .vig-track {
   position: absolute;
-  top: 12px;
+  top: 16px;
   right: 0;
   left: 0;
   height: 4px;
@@ -447,9 +463,9 @@
   left: 0;
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 9px;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
   background: var(--primary-container);
   color: var(--on-primary-container);
 }
@@ -465,11 +481,11 @@
   justify-content: center;
   gap: 6px;
   max-width: 100%;
-  padding: 7px 12px;
+  padding: 10px 16px;
   border-radius: 999px;
   background: var(--primary-container);
   color: var(--on-primary-container);
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 800;
   line-height: 1.2;
   text-align: center;
@@ -482,15 +498,14 @@
 .vignette--systems {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 14px;
 }
 
 .os-frame {
   display: grid;
-  gap: 10px;
+  gap: 14px;
   min-width: 0;
-  padding: 12px;
-  border: 1px solid var(--outline-variant);
+  padding: 16px;
   border-radius: 18px;
   background: var(--surface-low);
 }
@@ -503,7 +518,7 @@
 }
 
 .os-frame__name {
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-weight: 800;
 }
 
@@ -542,7 +557,7 @@
   border-radius: 999px;
   background: var(--surface-low);
   color: var(--ink-muted);
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   font-weight: 800;
   text-decoration: line-through;
 }
@@ -565,7 +580,7 @@
 }
 
 .probe:nth-child(1) {
-  --dx: -62px;
+  --dx: -96px;
 }
 
 .probe:nth-child(2) {
@@ -573,7 +588,7 @@
 }
 
 .probe:nth-child(3) {
-  --dx: 62px;
+  --dx: 96px;
 }
 
 .vig-sandbox {
@@ -612,10 +627,51 @@
   outline-offset: 3px;
 }
 
-@media (min-width: 768px) {
-  .diff-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+@media (min-width: 960px) {
+  .features .section-head {
+    margin-bottom: 88px;
+  }
+
+  .diff-list {
+    gap: 148px;
+  }
+
+  .diff-row {
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+    gap: 56px;
+    align-items: center;
+    --from: 36px;
+  }
+
+  .diff-copy {
+    grid-column: 1;
+  }
+
+  .diff-panel {
+    grid-column: 2;
+  }
+
+  .diff-row:nth-child(even) {
+    grid-template-columns: minmax(0, 0.58fr) minmax(0, 0.42fr);
+    --from: -36px;
+  }
+
+  .diff-row:nth-child(even) .diff-copy {
+    grid-column: 2;
+  }
+
+  .diff-row:nth-child(even) .diff-panel {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 959px) {
+  .probe:nth-child(1) {
+    --dx: -72px;
+  }
+
+  .probe:nth-child(3) {
+    --dx: 72px;
   }
 }
 
@@ -646,37 +702,40 @@
 }
 
 .vig-switch.is-held i {
-  transform: translateX(18px);
+  transform: translateX(20px);
   background: var(--on-primary);
 }
 
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .diff-card {
-    transition: border-color 180ms ease;
-  }
-
-  .diff-card:hover {
-    border-color: var(--primary);
-  }
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  html.js .diff-card:not(.is-in),
+  html.js .diff-row:not(.is-in) .diff-copy,
+  html.js .diff-row:not(.is-in) .diff-panel,
   html.js .install-panel:not(.is-in) {
     opacity: 0;
-    transform: translateY(12px);
   }
 
-  .diff-card.is-in,
+  html.js .diff-row:not(.is-in) .diff-copy {
+    transform: translateY(18px);
+  }
+
+  html.js .diff-row:not(.is-in) .diff-panel {
+    transform: translateX(var(--from));
+  }
+
+  .diff-row.is-in .diff-copy {
+    animation: copy-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 40ms);
+  }
+
+  .diff-row.is-in .diff-panel {
+    animation: panel-in 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 40ms + 60ms);
+  }
+
   .install-panel.is-in {
     animation: rise-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  .diff-card.is-in {
-    animation-delay: calc(var(--i) * 70ms);
-  }
-
-  .diff-card.is-live .vig-list li {
+  .diff-row.is-live .vig-list li {
     animation: row-in 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
     animation-delay: calc(var(--n) * 80ms);
   }
@@ -697,7 +756,7 @@
     animation-play-state: paused;
   }
 
-  .diff-card.is-live .vig-lines i::after {
+  .diff-row.is-live .vig-lines i::after {
     animation-play-state: running;
   }
 
@@ -718,8 +777,8 @@
     animation-name: switch-thumb;
   }
 
-  .diff-card.is-live .vig-switch__on,
-  .diff-card.is-live .vig-switch i {
+  .diff-row.is-live .vig-switch__on,
+  .diff-row.is-live .vig-switch i {
     animation-play-state: running;
   }
 
@@ -750,14 +809,14 @@
     animation-duration: 1.6s;
   }
 
-  .diff-card.is-live .vig-mover,
-  .diff-card.is-live .vig-track i,
-  .diff-card.is-live .vig-check,
-  .diff-card.is-live .vig-spark {
+  .diff-row.is-live .vig-mover,
+  .diff-row.is-live .vig-track i,
+  .diff-row.is-live .vig-check,
+  .diff-row.is-live .vig-spark {
     animation-play-state: running;
   }
 
-  .diff-card.is-live .os-frame {
+  .diff-row.is-live .os-frame {
     animation: os-pop 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
     animation-delay: calc(var(--n) * 120ms);
   }
@@ -780,8 +839,8 @@
     animation-name: check-pop;
   }
 
-  .diff-card.is-live .ok-dot,
-  .diff-card.is-live .os-check {
+  .diff-row.is-live .ok-dot,
+  .diff-row.is-live .os-check {
     animation-play-state: running;
   }
 
@@ -808,9 +867,9 @@
     animation-delay: 0.7s;
   }
 
-  .diff-card.is-live .probe,
-  .diff-card.is-live .vig-blocked li,
-  .diff-card.is-live .vig-shield {
+  .diff-row.is-live .probe,
+  .diff-row.is-live .vig-blocked li,
+  .diff-row.is-live .vig-shield {
     animation-play-state: running;
   }
 }
@@ -821,13 +880,35 @@
   }
 
   .vig-mover {
-    transform: translateX(calc(100cqi - 28px));
+    transform: translateX(calc(100cqi - 36px));
   }
 
   .vig-check,
   .os-check {
     display: block;
     opacity: 1;
+  }
+}
+
+@keyframes copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--from));
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -886,7 +967,7 @@
   }
   30%,
   64% {
-    transform: translateX(18px);
+    transform: translateX(20px);
   }
 }
 
@@ -897,7 +978,7 @@
   }
   58%,
   76% {
-    transform: translateX(calc(100cqi - 28px));
+    transform: translateX(calc(100cqi - 36px));
   }
   94%,
   100% {
