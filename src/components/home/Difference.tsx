@@ -21,7 +21,7 @@ export function Difference() {
   return (
     <section className="section" aria-labelledby="difference-title">
       <div className="wrap">
-        <SectionHeading id={block.id} titleId="difference-title" title={block.title} intro={block.intro} />
+        <SectionHeading id={block.id} titleId="difference-title" title={block.title} />
         <div ref={ref} className={shown ? "diff-grid is-in" : "diff-grid"}>
           {block.items.map((item) => {
             const Icon = icons[item.title]
