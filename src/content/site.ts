@@ -25,7 +25,6 @@ export const site = {
     macos: "Скачать для macOS",
     linux: "Установить на Linux",
   },
-  otherPlatforms: "Другие платформы",
   placeholders: {
     requirements: "[требования]",
   },
