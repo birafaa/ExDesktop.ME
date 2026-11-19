@@ -16,6 +16,7 @@ export function createAppTheme(mode: "light" | "dark", reducedMotion: boolean) {
     : undefined
 
   return createTheme({
+    cssVariables: { nativeColor: true, colorSchemeSelector: "data-theme" },
     palette: {
       mode,
       primary: { main: colors.primary, contrastText: colors.onPrimary },
