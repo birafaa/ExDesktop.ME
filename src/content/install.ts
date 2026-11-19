@@ -1,88 +1,22 @@
-import { site } from "./site.ts"
-
 export type OsId = "windows" | "linux" | "macos"
 
 export const install = {
   title: "Установка",
-  intro: `Установщик Windows на этой странице: ${site.version}, файл ${site.windows.file}, ${site.windows.size}. Для Linux и macOS одна команда. Она ставит последний релиз с GitHub, он может отличаться от файла Windows.`,
   osLabel: "Система",
-  detected: "Выбрана система, с которой открыта страница.",
   download: "Скачать установщик",
-  commandLabel: "Команда",
-  requirementsTitle: "Что нужно",
   faqTitle: "Если что-то пошло не так",
-  docsLink: "Про плагины написано в документации.",
   systems: {
     windows: {
       label: "Windows",
-      steps: [
-        {
-          title: "Скачайте файл",
-          body: `${site.windows.file}, ${site.windows.size}. В имени есть x64: это сборка для 64-битной Windows.`,
-        },
-        {
-          title: "Запустите установщик",
-          body: "Откройте скачанный файл и дойдите до конца установки.",
-        },
-        {
-          title: "Откройте exDesktop",
-          body: "После установки запустите программу как обычное приложение.",
-        },
-      ],
-      requirements: [
-        "Публикуется установщик x64. Других сборок Windows на сайте нет.",
-        `Размер файла ${site.windows.size}, версия ${site.version}.`,
-      ],
+      steps: ["Скачайте файл", "Запустите установщик", "Откройте exDesktop"],
     },
     linux: {
       label: "Linux",
-      steps: [
-        {
-          title: "Откройте терминал",
-          body: "Нужен curl или wget. Скрипт без них не скачает архив.",
-        },
-        {
-          title: "Выполните команду",
-          body: "Скрипт найдёт последний релиз, проверит контрольную сумму и распакует архив.",
-        },
-        {
-          title: "Ответьте на вопросы",
-          body: "Можно добавить программу в меню, поставить зависимости TG WS Proxy и включить функции AyuGram. AyuGram по умолчанию выключен.",
-        },
-        {
-          title: "Запустите exdesktop",
-          body: "Программа лежит в ~/.local/share/exDesktop/app. Ссылка для запуска: ~/.local/bin/exdesktop.",
-        },
-      ],
-      requirements: [
-        "Для Linux публикуется только сборка x86_64. На другой архитектуре скрипт остановится.",
-        "Нужен curl или wget.",
-      ],
+      steps: ["Откройте терминал", "Вставьте команду", "Запустите exdesktop"],
     },
     macos: {
       label: "macOS",
-      steps: [
-        {
-          title: "Откройте Терминал",
-          body: "Команда та же, что для Linux. Нужен curl или wget и утилита ditto.",
-        },
-        {
-          title: "Выполните команду",
-          body: "Скрипт сам берёт zip для arm64 или x64 и сверяет контрольную сумму.",
-        },
-        {
-          title: "Дождитесь конца",
-          body: "Те же вопросы, что на Linux: TG WS Proxy и AyuGram. Меню приложений спрашивается только на Linux.",
-        },
-        {
-          title: "Откройте exDesktop",
-          body: "Приложение ставится в /Applications. Если туда нельзя записать, скрипт кладёт его в ~/Applications.",
-        },
-      ],
-      requirements: [
-        "Есть сборки arm64 и x64. Скрипт выбирает по процессору.",
-        "Нужны curl или wget и ditto. ditto входит в macOS.",
-      ],
+      steps: ["Откройте Терминал", "Вставьте команду", "Откройте exDesktop"],
     },
   },
   faq: [
