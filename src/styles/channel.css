@@ -192,67 +192,119 @@
 }
 
 .peek {
-  padding: 14px;
+  padding: 12px 12px 14px;
   border: 1px solid var(--outline-variant);
   border-radius: 22px;
-  background: var(--surface);
-  box-shadow: 0 24px 50px rgb(35 25 24 / 18%);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  box-shadow: 0 28px 60px rgb(35 25 24 / 22%);
 }
 
 .peek__bar {
   display: grid;
-  grid-template-columns: 16px 1fr 16px;
+  grid-template-columns: 18px 1fr 18px;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   font-size: 0.92rem;
-}
-
-.peek__bar span {
-  height: 8px;
-  border-radius: 99px;
-  background: var(--outline-variant);
 }
 
 .peek__bar strong {
   text-align: center;
 }
 
+.peek__back {
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.peek__x {
+  color: var(--ink-muted);
+  font-size: 1.2rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.peek .logo {
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin: 2px auto 0;
+}
+
+.peek__name,
+.peek__ver {
+  margin: 0;
+  text-align: center;
+}
+
+.peek__name {
+  margin-top: 6px;
+  font-family: "Unbounded Variable", Unbounded, sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.04em;
+}
+
+.peek__ver {
+  color: var(--ink-muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.peek__search {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  margin: 10px 0;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--surface-container);
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+}
+
 .peek__tiles {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
 }
 
 .peek__tile {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
-  min-height: 54px;
-  padding: 8px;
+  min-height: 48px;
+  padding: 6px;
   border-radius: 14px;
   background: var(--surface-low);
 }
 
-.peek__tile i {
+.peek__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
   width: 28px;
   height: 28px;
-  flex: none;
   border-radius: 9px;
-  background: var(--tone, var(--primary));
+  background: color-mix(in srgb, var(--tone, var(--primary)) 18%, var(--surface));
+  color: var(--tone, var(--primary));
+}
+
+.peek__tile b,
+.peek__tile small {
+  display: block;
 }
 
 .peek__tile b {
-  display: block;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
+  line-height: 1.15;
 }
 
-.peek__tile em {
-  display: block;
-  width: 72%;
-  height: 7px;
-  margin-top: 6px;
-  border-radius: 99px;
-  background: color-mix(in srgb, var(--ink) 16%, transparent);
+.peek__tile small {
+  color: var(--ink-muted);
+  font-size: 0.62rem;
+  line-height: 1.2;
 }
 
 .peek__tile[data-tone="violet"] {
@@ -273,9 +325,20 @@
 
 @media (min-width: 980px) {
   .hero__grid {
-    grid-template-columns: minmax(280px, 0.86fr) minmax(0, 1.14fr);
-    gap: 40px;
+    grid-template-columns: minmax(340px, 0.72fr) minmax(0, 1.28fr);
+    gap: 28px;
     align-items: center;
+  }
+
+  .hero__actions {
+    flex-wrap: nowrap;
+  }
+
+  .hero__actions .MuiButton-root {
+    min-height: 44px;
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    white-space: nowrap;
   }
 
   .hero h1 {
@@ -283,7 +346,7 @@
   }
 
   .hero__stage {
-    padding: 78px 28px 8px 0;
+    padding: 214px 4px 8px 0;
   }
 
   .hero__back {
@@ -292,8 +355,8 @@
     top: 6px;
     right: 0;
     z-index: 0;
-    width: min(360px, 74%);
-    transform: translate(var(--px, 0px), var(--py, 0px)) rotate(7deg) scale(0.98);
+    width: min(500px, 92%);
+    transform: translate(var(--px, 0px), var(--py, 0px)) rotate(7deg) scale(0.92);
     transform-origin: 80% 0;
     pointer-events: none;
     transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -301,7 +364,7 @@
   }
 
   .hero__front {
-    width: 82%;
+    width: 84%;
   }
 
   .hero__front .channel-win {
