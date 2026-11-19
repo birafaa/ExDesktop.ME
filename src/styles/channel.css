@@ -341,6 +341,12 @@
     white-space: nowrap;
   }
 
+  .hero__actions .hero__cta.MuiButton-root {
+    min-height: 56px;
+    padding: 12px 22px;
+    font-size: 1.05rem;
+  }
+
   .hero h1 {
     font-size: clamp(2.5rem, 3.6vw, 4rem);
   }
@@ -356,7 +362,10 @@
     right: 0;
     z-index: 0;
     width: min(500px, 92%);
-    transform: translate(var(--px, 0px), var(--py, 0px)) rotate(7deg) scale(0.92);
+    transform:
+      translate(calc(var(--px, 0px) + var(--scroll, 0) * 42px), calc(var(--py, 0px) - var(--scroll, 0) * 28px))
+      rotate(calc(7deg - var(--scroll, 0) * 3deg))
+      scale(calc(0.92 + var(--scroll, 0) * 0.05));
     transform-origin: 80% 0;
     pointer-events: none;
     transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -364,7 +373,9 @@
   }
 
   .hero__front {
-    width: 84%;
+    width: 88%;
+    transform: scale(calc(1 + var(--scroll, 0) * 0.06));
+    transform-origin: 40% 60%;
   }
 
   .hero__front .channel-win {
