@@ -209,59 +209,78 @@
   }
 }
 
-.feature-list {
+.diff-bento {
   display: grid;
-  gap: var(--section-y);
+  gap: 16px;
 }
 
-.feature {
+.diff-card {
   display: grid;
-  gap: 28px;
-  align-items: center;
+  align-content: start;
+  min-width: 0;
+  padding: 14px 14px 22px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 32px;
+  background: var(--surface);
 }
 
-.feature__copy h3 {
-  margin: 0;
+.diff-card:nth-child(2) {
+  border-radius: 28px 36px 28px 32px;
+}
+
+.diff-card:nth-child(3) {
+  border-radius: 36px 28px 32px 28px;
+}
+
+.diff-card:nth-child(4) {
+  border-radius: 28px 32px 36px 28px;
+}
+
+.diff-card__art {
+  display: grid;
+  place-items: center;
+  height: 188px;
+  border-radius: 22px;
+  background: var(--surface-low);
+}
+
+.diff-card__art svg {
+  width: min(100%, 300px);
+  height: 150px;
+}
+
+.diff-card h3 {
+  margin: 18px 8px 0;
   font-family: "Unbounded Variable", Unbounded, sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(1.4rem, 2vw, 1.75rem);
   letter-spacing: -0.04em;
-  line-height: 1.05;
+  line-height: 1.1;
 }
 
-.feature__copy p {
-  max-width: 28rem;
-  margin: 14px 0 0;
+.diff-card p {
+  margin: 8px 8px 0;
   color: var(--ink-muted);
-  font-size: 1.15rem;
   white-space: pre-line;
 }
 
-.feature-art {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.art-soft {
-  fill: var(--surface-container);
-}
-
-.art-card {
-  fill: var(--surface);
-  stroke: var(--outline-variant);
-  stroke-width: 2;
-}
-
-.art-accent {
+.diff-fill {
   fill: var(--primary-container);
 }
 
-.art-strong {
+.diff-surface {
+  fill: var(--surface);
+}
+
+.diff-accent {
   fill: var(--primary);
 }
 
-.art-mark {
+.diff-mark {
   fill: var(--on-primary-container);
+}
+
+.diff-on {
+  fill: var(--on-primary);
 }
 
 .install-block {
@@ -288,14 +307,10 @@
   outline-offset: 3px;
 }
 
-@media (min-width: 900px) {
-  .feature {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: 64px;
-  }
-
-  .feature--flip .feature__copy {
-    order: 2;
+@media (min-width: 720px) {
+  .diff-bento {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
 }
 
@@ -322,15 +337,19 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html.js .feature:not(.is-in),
+  html.js .diff-card:not(.is-in),
   html.js .install-panel:not(.is-in) {
     opacity: 0;
     transform: translateY(12px);
   }
 
-  .feature.is-in,
+  .diff-card.is-in,
   .install-panel.is-in {
-    animation: rise-in 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: rise-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .diff-card.is-in {
+    animation-delay: calc(var(--i) * 60ms);
   }
 }
 

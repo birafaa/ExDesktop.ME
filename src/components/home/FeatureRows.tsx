@@ -1,71 +1,83 @@
+import type { CSSProperties } from "react"
 import { home } from "../../content/home.ts"
 import { useReveal } from "../../hooks/useReveal.ts"
 import { SectionHeading } from "../SectionHeading.tsx"
 
-const kinds = ["plugins", "port", "systems", "sandbox"] as const
-
-function Art({ kind }: { kind: (typeof kinds)[number] }) {
-  if (kind === "plugins") {
-    return (
-      <svg className="feature-art" viewBox="0 0 640 440" aria-hidden="true">
-        <rect className="art-soft" x="36" y="78" width="250" height="250" rx="48" />
-        <rect className="art-card" x="150" y="40" width="280" height="200" rx="40" />
-        <rect className="art-accent" x="250" y="170" width="300" height="210" rx="46" />
-        <rect className="art-mark" x="292" y="214" width="72" height="72" rx="20" />
-      </svg>
-    )
-  }
-  if (kind === "port") {
-    return (
-      <svg className="feature-art" viewBox="0 0 640 440" aria-hidden="true">
-        <rect className="art-card" x="36" y="90" width="220" height="260" rx="40" />
-        <rect className="art-accent" x="384" y="90" width="220" height="260" rx="40" />
-        <rect className="art-strong" x="268" y="198" width="104" height="28" rx="14" />
-        <circle className="art-mark" cx="146" cy="220" r="36" />
-        <circle className="art-soft" cx="494" cy="220" r="36" />
-      </svg>
-    )
-  }
-  if (kind === "systems") {
-    return (
-      <svg className="feature-art" viewBox="0 0 640 440" aria-hidden="true">
-        <rect className="art-card" x="48" y="70" width="170" height="250" rx="28" />
-        <rect className="art-accent" x="236" y="120" width="170" height="200" rx="36" />
-        <rect className="art-soft" x="424" y="48" width="170" height="280" rx="24" />
-        <rect className="art-mark" x="86" y="108" width="94" height="12" rx="6" />
-      </svg>
-    )
-  }
+function PluginsArt() {
   return (
-    <svg className="feature-art" viewBox="0 0 640 440" aria-hidden="true">
-      <rect className="art-soft" x="70" y="40" width="500" height="360" rx="72" />
-      <rect className="art-card" x="150" y="100" width="340" height="240" rx="40" />
-      <circle className="art-accent" cx="120" cy="90" r="18" />
-      <circle className="art-accent" cx="530" cy="340" r="22" />
-      <circle className="art-mark" cx="320" cy="220" r="28" />
+    <svg viewBox="0 0 320 180" aria-hidden="true">
+      <rect className="diff-fill" x="28" y="46" width="132" height="96" rx="28" />
+      <rect className="diff-fill" x="160" y="34" width="132" height="96" rx="28" />
+      <rect className="diff-accent" x="94" y="62" width="132" height="96" rx="30" />
+      <rect className="diff-mark" x="142" y="94" width="36" height="36" rx="12" />
     </svg>
   )
 }
 
-function Feature({
+function PortArt() {
+  return (
+    <svg viewBox="0 0 320 180" aria-hidden="true">
+      <rect className="diff-fill" x="24" y="40" width="100" height="100" rx="32" />
+      <circle className="diff-mark" cx="74" cy="90" r="16" />
+      <rect className="diff-accent" x="136" y="82" width="48" height="16" rx="8" />
+      <rect className="diff-accent" x="196" y="40" width="100" height="100" rx="32" />
+      <circle className="diff-on" cx="246" cy="90" r="16" />
+    </svg>
+  )
+}
+
+function SystemsArt() {
+  return (
+    <svg viewBox="0 0 320 180" aria-hidden="true">
+      <rect className="diff-fill" x="36" y="40" width="68" height="112" rx="22" />
+      <rect className="diff-accent" x="126" y="24" width="68" height="128" rx="22" />
+      <rect className="diff-fill" x="216" y="52" width="68" height="100" rx="22" />
+      <rect className="diff-mark" x="148" y="48" width="24" height="8" rx="4" />
+    </svg>
+  )
+}
+
+function SandboxArt() {
+  return (
+    <svg viewBox="0 0 320 180" aria-hidden="true">
+      <rect className="diff-fill" x="36" y="22" width="248" height="136" rx="40" />
+      <rect className="diff-surface" x="78" y="48" width="164" height="84" rx="24" />
+      <circle className="diff-accent" cx="160" cy="90" r="14" />
+      <circle className="diff-mark" cx="58" cy="40" r="8" />
+      <circle className="diff-mark" cx="262" cy="140" r="8" />
+    </svg>
+  )
+}
+
+const art = {
+  Плагины: PluginsArt,
+  Перенос: PortArt,
+  Системы: SystemsArt,
+  Среда: SandboxArt,
+} as const
+
+function Card({
   title,
   body,
-  kind,
-  flip,
+  index,
 }: {
-  title: string
+  title: keyof typeof art
   body: string
-  kind: (typeof kinds)[number]
-  flip: boolean
+  index: number
 }) {
   const { ref, shown } = useReveal<HTMLElement>()
+  const Art = art[title]
   return (
-    <article ref={ref} className={shown ? `feature is-in${flip ? " feature--flip" : ""}` : `feature${flip ? " feature--flip" : ""}`}>
-      <div className="feature__copy">
-        <h3>{title}</h3>
-        <p>{body}</p>
+    <article
+      ref={ref}
+      className={shown ? "diff-card is-in" : "diff-card"}
+      style={{ "--i": index } as CSSProperties}
+    >
+      <div className="diff-card__art">
+        <Art />
       </div>
-      <Art kind={kind} />
+      <h3>{title}</h3>
+      <p>{body}</p>
     </article>
   )
 }
@@ -76,15 +88,9 @@ export function FeatureRows() {
     <section className="section features" aria-labelledby="difference-title">
       <div className="wrap">
         <SectionHeading id={block.id} titleId="difference-title" title={block.title} />
-        <div className="feature-list">
+        <div className="diff-bento">
           {block.items.map((item, index) => (
-            <Feature
-              key={item.title}
-              title={item.title}
-              body={item.body}
-              kind={kinds[index] ?? "plugins"}
-              flip={index % 2 === 1}
-            />
+            <Card key={item.title} title={item.title} body={item.body} index={index} />
           ))}
         </div>
       </div>
