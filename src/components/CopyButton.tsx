@@ -13,6 +13,7 @@ export function CopyButton({ text }: { text: string }) {
     <Button
       type="button"
       variant="contained"
+      className="btn-tonal"
       startIcon={status === "copied" ? <CheckIcon /> : <ContentCopyIcon />}
       onClick={() => void copy(text)}
     >

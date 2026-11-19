@@ -36,7 +36,7 @@
   background: var(--surface);
   color: var(--ink);
   font: inherit;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 800;
   cursor: pointer;
 }
@@ -59,6 +59,8 @@
 .install-action {
   display: grid;
   justify-items: center;
+  width: 100%;
+  min-width: 0;
   margin-top: 28px;
 }
 
@@ -73,7 +75,7 @@
   background: var(--primary);
   color: var(--on-primary);
   font: inherit;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 800;
   text-decoration: none;
 }
@@ -92,6 +94,8 @@
 
 .install-action .install-command__row {
   width: min(100%, 720px);
+  max-width: 100%;
+  min-width: 0;
 }
 
 .install-steps {
@@ -295,6 +299,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  max-width: 100%;
   padding: 12px;
   border-radius: 20px;
   background: var(--surface-container);
@@ -302,8 +308,10 @@
 
 .install-command__row code {
   flex: 1 1 220px;
+  min-width: 0;
+  overflow-x: auto;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 
 .install-req ul {
