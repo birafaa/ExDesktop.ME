@@ -33,6 +33,7 @@
   --tone-pink: #d63d78;
   --tone-green: #1e8a45;
   --tone-red: #d4333c;
+  --status: #146c34;
   --page-width: 1120px;
   --gutter: 16px;
   --section-y: 72px;
@@ -66,6 +67,7 @@
   --shadow: 0 24px 60px rgb(0 0 0 / 45%);
   --shadow-peek: 0 28px 60px rgb(0 0 0 / 48%);
   --shadow-lift: 0 16px 40px rgb(0 0 0 / 36%);
+  --status: #3dce7c;
   color-scheme: dark;
 }
 
