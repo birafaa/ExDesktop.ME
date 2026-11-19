@@ -192,7 +192,6 @@
 .install-page__intro p,
 .install-note,
 .install-req li,
-.install-faq p,
 .steps p {
   max-width: 42rem;
   color: var(--ink-muted);
@@ -296,8 +295,7 @@
 
 .steps h2,
 .steps h3,
-.install-req h2,
-.install-faq h2 {
+.install-req h2 {
   margin: 0;
   font-family: "Unbounded Variable", Unbounded, sans-serif;
   font-size: 1.2rem;
@@ -306,15 +304,13 @@
 }
 
 .steps p,
-.install-req li,
-.install-faq p {
+.install-req li {
   margin: 6px 0 0;
 }
 
 .install-file,
 .install-command,
-.install-req,
-.install-faq {
+.install-req {
   margin-top: 22px;
   padding: 22px;
   border: 1px solid var(--outline-variant);
@@ -359,32 +355,6 @@
 .install-req ul {
   margin: 12px 0 0;
   padding-left: 1.2rem;
-}
-
-.install-faq__list {
-  display: grid;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.install-faq details {
-  border-radius: 18px;
-  background: var(--surface-container);
-}
-
-.install-faq summary {
-  padding: 14px 16px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.install-faq details p {
-  margin: 0;
-  padding: 0 16px 14px;
-}
-
-.install-faq details[open] summary {
-  color: var(--primary);
 }
 
 @media (prefers-reduced-motion: no-preference) {

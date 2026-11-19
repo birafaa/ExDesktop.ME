@@ -35,17 +35,6 @@ export function InstallPage() {
             <li key={step}>{step}</li>
           ))}
         </ol>
-        <section className="install-faq" aria-labelledby="faq-title">
-          <h2 id="faq-title">{install.faqTitle}</h2>
-          <div className="install-faq__list">
-            {install.faq.map((item) => (
-              <details key={item.q}>
-                <summary>{item.q}</summary>
-                <p>{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
       </div>
     </article>
   )
