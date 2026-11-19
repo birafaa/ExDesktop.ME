@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import { home } from "../../content/home.ts"
 import { site } from "../../content/site.ts"
 import { ui } from "../../content/ui.ts"
-import { useEffect, useRef, type MouseEvent } from "react"
+import type { MouseEvent } from "react"
 import { Logo } from "../brand/Logo.tsx"
 import { ChannelWindow } from "./ChannelWindow.tsx"
 import { SettingsPeek } from "./SettingsPeek.tsx"
@@ -27,38 +27,6 @@ function shiftPeek(event: MouseEvent<HTMLDivElement>, reset = false) {
 }
 
 export function Hero() {
-  const stageRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const node = stageRef.current
-    if (!node) return
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)")
-    let frame = 0
-    const apply = () => {
-      frame = 0
-      if (reduce.matches) {
-        node.style.setProperty("--scroll", "0")
-        return
-      }
-      const rect = node.getBoundingClientRect()
-      const total = Math.max(rect.height, 1)
-      const passed = Math.min(Math.max(-rect.top, 0), total)
-      node.style.setProperty("--scroll", (passed / total).toFixed(3))
-    }
-    const onScroll = () => {
-      if (frame) return
-      frame = window.requestAnimationFrame(apply)
-    }
-    apply()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    reduce.addEventListener("change", apply)
-    return () => {
-      window.removeEventListener("scroll", onScroll)
-      reduce.removeEventListener("change", apply)
-      if (frame) window.cancelAnimationFrame(frame)
-    }
-  }, [])
-
   return (
     <>
       <section className="hero section" aria-labelledby="hero-title">
@@ -72,7 +40,6 @@ export function Hero() {
           <p className="section-intro">{home.hero.extra}</p>
           <div className="hero__actions">
             <Button
-              className="hero__cta"
               variant="contained"
               component={Link}
               to="/install"
@@ -114,7 +81,6 @@ export function Hero() {
           </ul>
         </div>
         <div
-          ref={stageRef}
           className="hero__stage"
           onMouseMove={(event) => shiftPeek(event)}
           onMouseLeave={(event) => shiftPeek(event, true)}
