@@ -230,9 +230,19 @@ a {
 }
 
 .site-footer nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: inherit;
   text-decoration: none;
   font-weight: 700;
+}
+
+.site-footer nav .brand-icon,
+.site-footer nav .MuiSvgIcon-root {
+  width: 16px;
+  height: 16px;
+  flex: none;
 }
 
 .site-footer nav a:hover {
@@ -871,7 +881,7 @@ mark {
   .link-card {
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: span 3;
+    grid-row: span 4;
     align-items: start;
     height: auto;
   }

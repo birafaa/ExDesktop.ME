@@ -1,8 +1,16 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward"
+import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined"
 import { Link } from "react-router-dom"
 import { home } from "../../content/home.ts"
 import { useReveal } from "../../hooks/useReveal.ts"
+import { BrandIcon, brandPaths } from "../brand/BrandIcon.tsx"
 import { SectionHeading } from "../SectionHeading.tsx"
+
+function LinkMark({ title }: { title: string }) {
+  if (title === "GitHub") return <BrandIcon path={brandPaths.github} size={26} />
+  if (title === "Telegram") return <BrandIcon path={brandPaths.telegram} size={26} />
+  return <MenuBookOutlinedIcon />
+}
 
 export function LinkGrid() {
   const block = home.links
@@ -16,6 +24,9 @@ export function LinkGrid() {
           {block.items.map((item) => {
             const body = (
               <>
+                <span className="link-card__icon">
+                  <LinkMark title={item.title} />
+                </span>
                 <span className="link-card__kicker">{item.kicker}</span>
                 <span className="link-card__title">
                   {item.title}
