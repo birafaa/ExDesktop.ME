@@ -209,44 +209,69 @@
   }
 }
 
-.diff-list {
-  display: grid;
-  gap: 36px;
-}
-
-.diff-row {
+.diff-grid {
   display: grid;
   gap: 16px;
-  align-items: center;
-  min-width: 0;
+  align-items: stretch;
 }
 
-.diff-row__copy h3 {
+.diff-card {
+  display: grid;
+  grid-template-rows: var(--stage) minmax(7.6rem, auto);
+  min-width: 0;
+  height: 100%;
+  padding: 12px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 28px;
+  background: var(--surface);
+  --stage: 320px;
+}
+
+.diff-stage {
+  display: grid;
+  place-items: center;
+  height: var(--stage);
+  padding: 12px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--surface-low);
+}
+
+.diff-copy {
+  min-height: 7.8rem;
+  padding: 14px 8px 6px;
+}
+
+.diff-copy h3 {
   margin: 0;
   font-family: "Unbounded Variable", Unbounded, sans-serif;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: 1.45rem;
   letter-spacing: -0.04em;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
-.diff-row__copy p {
-  max-width: 34rem;
-  margin: 10px 0 0;
+.diff-copy p {
+  margin: 8px 0 0;
   color: var(--ink-muted);
   white-space: pre-line;
 }
 
 .vignette {
+  display: grid;
+  align-content: center;
+  width: 100%;
+  height: 100%;
   min-width: 0;
-  padding: 14px;
+  padding: 10px;
   border: 1px solid var(--outline-variant);
-  border-radius: 24px;
+  border-radius: 16px;
   background: var(--surface);
-  box-shadow: var(--shadow);
 }
 
 .vig-badge {
+  justify-self: start;
   display: inline-flex;
+  width: max-content;
   margin-bottom: 12px;
   padding: 4px 10px;
   border-radius: 999px;
@@ -329,6 +354,7 @@
 }
 
 .vig-switch {
+  position: relative;
   display: flex;
   flex: none;
   align-items: center;
@@ -339,7 +365,17 @@
   background: var(--surface-highest);
 }
 
+.vig-switch__on {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--primary);
+  opacity: 0;
+}
+
 .vig-switch i {
+  position: relative;
+  z-index: 1;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -348,26 +384,47 @@
 }
 
 .vignette--port {
+  gap: 10px;
+  justify-items: center;
+}
+
+.port-board {
   display: grid;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) minmax(44px, 0.7fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.vig-plugin {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 8px 6px;
+  text-align: center;
 }
 
 .vig-plugin b {
   display: block;
+  max-width: 100%;
   overflow: hidden;
-  font-size: 0.92rem;
+  font-size: 0.72rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.vig-flow {
-  display: grid;
-  justify-items: center;
-  gap: 8px;
+.port-lane {
+  position: relative;
+  height: 28px;
+  container-type: inline-size;
 }
 
 .vig-track {
-  width: min(100%, 180px);
+  position: absolute;
+  top: 12px;
+  right: 0;
+  left: 0;
   height: 4px;
   overflow: hidden;
   border-radius: 99px;
@@ -376,23 +433,45 @@
 
 .vig-track i {
   display: block;
-  width: 0;
+  width: 100%;
   height: 100%;
   border-radius: inherit;
   background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.vig-mover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+.vig-check {
+  color: var(--status);
+  opacity: 0;
 }
 
 .vig-port {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   max-width: 100%;
-  padding: 8px 14px;
+  padding: 7px 12px;
   border-radius: 999px;
   background: var(--primary-container);
   color: var(--on-primary-container);
-  font-size: 0.92rem;
+  font-size: 0.78rem;
   font-weight: 800;
+  line-height: 1.2;
   text-align: center;
 }
 
@@ -435,9 +514,15 @@
   background: var(--status);
 }
 
+.os-check {
+  display: none;
+  color: var(--status);
+}
+
 .vignette--sandbox {
-  display: grid;
+  position: relative;
   gap: 12px;
+  justify-items: center;
 }
 
 .vig-blocked {
@@ -462,12 +547,43 @@
   text-decoration: line-through;
 }
 
+.vig-field {
+  position: relative;
+  width: 100%;
+}
+
+.probe {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0;
+}
+
+.probe:nth-child(1) {
+  --dx: -62px;
+}
+
+.probe:nth-child(2) {
+  --dx: 0px;
+}
+
+.probe:nth-child(3) {
+  --dx: 62px;
+}
+
 .vig-sandbox {
+  position: relative;
+  z-index: 1;
   justify-content: flex-start;
   border: 1.5px solid var(--outline);
 }
 
-.vig-sandbox > .MuiSvgIcon-root {
+.vig-shield {
   flex: none;
   color: var(--primary);
 }
@@ -496,30 +612,10 @@
   outline-offset: 3px;
 }
 
-@media (min-width: 900px) {
-  .diff-row {
-    grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.22fr);
-    gap: 40px;
-  }
-
-  .diff-row:nth-child(even) .diff-row__copy {
-    order: 2;
-  }
-
-  .diff-row:nth-child(2) {
-    grid-template-columns: 1fr;
-  }
-
-  .diff-row:nth-child(2) .diff-row__copy {
-    order: 0;
-  }
-}
-
-@media (min-width: 720px) {
-  .vignette--port {
-    grid-template-columns: minmax(160px, 1fr) minmax(220px, auto) minmax(160px, 1fr);
-    align-items: center;
-    gap: 16px;
+@media (min-width: 768px) {
+  .diff-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
 }
 
@@ -545,82 +641,193 @@
   }
 }
 
-@media (hover: hover) {
-  .vignette {
-    transition:
-      border-color 180ms ease,
-      transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+.vig-switch.is-held .vig-switch__on {
+  opacity: 1;
+}
+
+.vig-switch.is-held i {
+  transform: translateX(18px);
+  background: var(--on-primary);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .diff-card {
+    transition: border-color 180ms ease;
   }
 
-  .diff-row:hover .vignette {
+  .diff-card:hover {
     border-color: var(--primary);
-    transform: translateY(-3px);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html.js .diff-row:not(.is-in),
+  html.js .diff-card:not(.is-in),
   html.js .install-panel:not(.is-in) {
     opacity: 0;
     transform: translateY(12px);
   }
 
-  .diff-row.is-in,
+  .diff-card.is-in,
   .install-panel.is-in {
     animation: rise-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  .diff-row.is-in {
-    animation-delay: calc(var(--i) * 60ms);
+  .diff-card.is-in {
+    animation-delay: calc(var(--i) * 70ms);
   }
 
-  .vig-switch,
-  .vig-switch i,
+  .diff-card.is-live .vig-list li {
+    animation: row-in 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--n) * 80ms);
+  }
+
+  .vig-lines i {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vig-lines i::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 42%;
+    background: color-mix(in srgb, var(--surface) 72%, transparent);
+    transform: translateX(-140%);
+    animation: vig-shimmer 2.4s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .diff-card.is-live .vig-lines i::after {
+    animation-play-state: running;
+  }
+
+  .vig-switch__on,
+  .vig-switch i {
+    animation-duration: 3.8s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-iteration-count: infinite;
+    animation-delay: calc(var(--n) * 0.42s);
+    animation-play-state: paused;
+  }
+
+  .vig-switch__on {
+    animation-name: switch-on;
+  }
+
+  .vig-switch i {
+    animation-name: switch-thumb;
+  }
+
+  .diff-card.is-live .vig-switch__on,
+  .diff-card.is-live .vig-switch i {
+    animation-play-state: running;
+  }
+
+  .vig-mover,
   .vig-track i,
+  .vig-check,
+  .vig-spark {
+    animation-duration: 4.6s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+  }
+
+  .vig-mover {
+    animation-name: chip-travel;
+  }
+
+  .vig-track i {
+    animation-name: bar-fill;
+  }
+
+  .vig-check {
+    animation-name: check-pop;
+  }
+
+  .vig-spark {
+    animation-name: spark-pulse;
+    animation-duration: 1.6s;
+  }
+
+  .diff-card.is-live .vig-mover,
+  .diff-card.is-live .vig-track i,
+  .diff-card.is-live .vig-check,
+  .diff-card.is-live .vig-spark {
+    animation-play-state: running;
+  }
+
+  .diff-card.is-live .os-frame {
+    animation: os-pop 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--n) * 120ms);
+  }
+
+  .ok-dot,
+  .os-check {
+    animation-duration: 4.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-delay: calc(var(--n) * 0.45s);
+    animation-play-state: paused;
+  }
+
   .ok-dot {
-    transition:
-      transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      background-color 260ms ease,
-      opacity 260ms ease,
-      width 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation-name: dot-pulse;
   }
 
-  .diff-row.is-in .vig-switch--live {
-    background: var(--primary);
+  .os-check {
+    display: block;
+    animation-name: check-pop;
   }
 
-  .diff-row.is-in .vig-switch--live i {
-    transform: translateX(18px);
-    background: var(--on-primary);
+  .diff-card.is-live .ok-dot,
+  .diff-card.is-live .os-check {
+    animation-play-state: running;
   }
 
-  .diff-row.is-in .vig-track i {
-    width: 100%;
+  .probe,
+  .vig-blocked li,
+  .vig-shield {
+    animation-duration: 3.8s;
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation-iteration-count: infinite;
+    animation-delay: calc(var(--n) * 0.42s);
+    animation-play-state: paused;
   }
 
-  .ok-dot {
-    opacity: 0.35;
-    transform: scale(0.7);
+  .probe {
+    animation-name: probe-out;
   }
 
-  .diff-row.is-in .ok-dot {
-    opacity: 1;
-    transform: none;
+  .vig-blocked li {
+    animation-name: chip-shake;
+  }
+
+  .vig-shield {
+    animation-name: shield-pulse;
+    animation-delay: 0.7s;
+  }
+
+  .diff-card.is-live .probe,
+  .diff-card.is-live .vig-blocked li,
+  .diff-card.is-live .vig-shield {
+    animation-play-state: running;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vig-switch--live {
-    background: var(--primary);
-  }
-
-  .vig-switch--live i {
-    transform: translateX(18px);
-    background: var(--on-primary);
-  }
-
   .vig-track i {
-    width: 100%;
+    transform: scaleX(1);
+  }
+
+  .vig-mover {
+    transform: translateX(calc(100cqi - 28px));
+  }
+
+  .vig-check,
+  .os-check {
+    display: block;
+    opacity: 1;
   }
 }
 
@@ -632,5 +839,188 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes vig-shimmer {
+  0%,
+  20% {
+    transform: translateX(-140%);
+  }
+  70%,
+  100% {
+    transform: translateX(280%);
+  }
+}
+
+@keyframes switch-on {
+  0%,
+  14%,
+  78%,
+  100% {
+    opacity: 0;
+  }
+  30%,
+  64% {
+    opacity: 1;
+  }
+}
+
+@keyframes switch-thumb {
+  0%,
+  14%,
+  78%,
+  100% {
+    transform: translateX(0);
+  }
+  30%,
+  64% {
+    transform: translateX(18px);
+  }
+}
+
+@keyframes chip-travel {
+  0%,
+  14% {
+    transform: translateX(0);
+  }
+  58%,
+  76% {
+    transform: translateX(calc(100cqi - 28px));
+  }
+  94%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes bar-fill {
+  0%,
+  14% {
+    transform: scaleX(0);
+  }
+  58%,
+  76% {
+    transform: scaleX(1);
+  }
+  94%,
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes check-pop {
+  0%,
+  52% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  66%,
+  80% {
+    opacity: 1;
+    transform: none;
+  }
+  94%,
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes spark-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes os-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes dot-pulse {
+  0%,
+  20%,
+  78%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.7);
+  }
+  36%,
+  58% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes probe-out {
+  0%,
+  10% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  24% {
+    opacity: 1;
+  }
+  46% {
+    opacity: 1;
+    transform: translate(var(--dx), -42px);
+  }
+  56% {
+    transform: translate(var(--dx), -32px);
+  }
+  82%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes chip-shake {
+  0%,
+  40%,
+  68%,
+  100% {
+    transform: none;
+  }
+  48% {
+    transform: translateX(-2px) rotate(-3deg);
+  }
+  56% {
+    transform: translateX(2px) rotate(3deg);
+  }
+}
+
+@keyframes shield-pulse {
+  0%,
+  38%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.14);
   }
 }
