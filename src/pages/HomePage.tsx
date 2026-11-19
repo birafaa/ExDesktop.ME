@@ -1,7 +1,9 @@
-import { Difference } from "../components/home/Difference.tsx"
+import { FeatureRows } from "../components/home/FeatureRows.tsx"
 import { Hero } from "../components/home/Hero.tsx"
-import { InstallCta } from "../components/home/InstallCta.tsx"
+import { HomeInstall } from "../components/home/HomeInstall.tsx"
 import { LinkGrid } from "../components/home/LinkGrid.tsx"
+import { PortDemo } from "../components/home/PortDemo.tsx"
+import { Roadmap } from "../components/home/Roadmap.tsx"
 import { site } from "../content/site.ts"
 import { usePageTitle } from "../hooks/usePageTitle.ts"
 
@@ -11,9 +13,11 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <Difference />
-      <InstallCta />
+      <FeatureRows />
+      <HomeInstall />
+      <Roadmap />
       <LinkGrid />
+      <PortDemo />
     </>
   )
 }

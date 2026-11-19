@@ -1,18 +1,8 @@
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward"
-import GitHubIcon from "@mui/icons-material/GitHub"
-import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined"
-import TelegramIcon from "@mui/icons-material/Telegram"
-import type { SvgIconComponent } from "@mui/icons-material"
 import { Link } from "react-router-dom"
 import { home } from "../../content/home.ts"
 import { useReveal } from "../../hooks/useReveal.ts"
 import { SectionHeading } from "../SectionHeading.tsx"
-
-const icons: Record<(typeof home.links.items)[number]["title"], SvgIconComponent> = {
-  GitHub: GitHubIcon,
-  Telegram: TelegramIcon,
-  Документация: MenuBookOutlinedIcon,
-}
 
 export function LinkGrid() {
   const block = home.links
@@ -24,12 +14,8 @@ export function LinkGrid() {
         <SectionHeading id={block.id} titleId="links-title" title={block.title} />
         <div ref={ref} className={shown ? "link-grid is-in" : "link-grid"}>
           {block.items.map((item) => {
-            const Icon = icons[item.title]
             const body = (
               <>
-                <span className="link-card__icon">
-                  <Icon />
-                </span>
                 <span className="link-card__kicker">{item.kicker}</span>
                 <span className="link-card__title">
                   {item.title}

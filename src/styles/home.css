@@ -1,0 +1,429 @@
+.hero.section {
+  padding-top: clamp(28px, 5vw, 64px);
+  padding-bottom: 8px;
+}
+
+.hero {
+  position: relative;
+  overflow: clip;
+  text-align: center;
+}
+
+.hero__shape {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__shape--a {
+  top: 6%;
+  left: -120px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: var(--primary-container);
+}
+
+.hero__shape--b {
+  right: -60px;
+  bottom: 8%;
+  width: 200px;
+  height: 150px;
+  border-radius: 72px 40px 80px 36px;
+  background: var(--surface-container);
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+}
+
+.hero__copy .section-intro {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 10vw, 6.4rem);
+}
+
+.hero__actions {
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.hero-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 68px;
+  padding: 0 36px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-decoration: none;
+}
+
+.hero-download:hover {
+  background: var(--primary-hover);
+  color: var(--on-primary);
+}
+
+.hero-download .MuiSvgIcon-root {
+  font-size: 26px;
+}
+
+.hero__other {
+  margin-top: 14px;
+  padding: 8px 4px;
+  border: 0;
+  background: none;
+  color: var(--link);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.hero__meta {
+  max-width: 36rem;
+  margin: 8px 0 0;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.picker-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: color-mix(in srgb, var(--ink) 40%, transparent);
+}
+
+.picker {
+  width: min(100%, 640px);
+  padding: 24px;
+  border-radius: 28px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.picker h2 {
+  margin: 0 0 16px;
+  font-family: "Unbounded Variable", Unbounded, sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+.preview {
+  padding-bottom: var(--section-y);
+  overflow: clip;
+}
+
+.preview .hero__stage {
+  max-width: 1040px;
+  margin-inline: auto;
+  padding-top: 36px;
+}
+
+.preview .hero__front {
+  width: min(820px, 100%);
+  margin-inline: auto;
+}
+
+@media (min-width: 980px) {
+  .preview .hero__stage {
+    padding-top: 78px;
+  }
+
+  .preview .hero__back {
+    top: 0;
+    right: 2%;
+    width: min(460px, 54%);
+    transform: translate(var(--px, 0px), var(--py, 0px)) rotate(6deg) scale(0.94);
+  }
+
+  .preview .hero__front {
+    width: min(780px, 84%);
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
+.feature-list {
+  display: grid;
+  gap: var(--section-y);
+}
+
+.feature {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+}
+
+.feature__copy h3 {
+  margin: 0;
+  font-family: "Unbounded Variable", Unbounded, sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.feature__copy p {
+  max-width: 28rem;
+  margin: 14px 0 0;
+  color: var(--ink-muted);
+  font-size: 1.15rem;
+  white-space: pre-line;
+}
+
+.feature-art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.art-soft {
+  fill: var(--surface-container);
+}
+
+.art-card {
+  fill: var(--surface);
+  stroke: var(--outline-variant);
+  stroke-width: 2;
+}
+
+.art-accent {
+  fill: var(--primary-container);
+}
+
+.art-strong {
+  fill: var(--primary);
+}
+
+.art-mark {
+  fill: var(--on-primary-container);
+}
+
+.install-block {
+  max-width: 880px;
+}
+
+.install-block .section-head {
+  text-align: center;
+}
+
+.install-block .section-intro {
+  margin-inline: auto;
+}
+
+.install-panel {
+  margin-top: 8px;
+}
+
+.roadmap-section {
+  position: relative;
+  overflow: clip;
+}
+
+.roadmap-section::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  right: -80px;
+  width: 220px;
+  height: 220px;
+  border-radius: 40% 60% 70% 30%;
+  background: var(--primary-container);
+  pointer-events: none;
+}
+
+.roadmap {
+  position: relative;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.roadmap li {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--outline-variant);
+  font-family: "Unbounded Variable", Unbounded, sans-serif;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  letter-spacing: -0.03em;
+}
+
+.roadmap li span {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font-family: "Manrope Variable", Manrope, sans-serif;
+  font-size: 1rem;
+}
+
+.port {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.port-well {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 16px;
+  min-height: 180px;
+  padding: 20px;
+  border: 1.5px dashed var(--outline);
+  border-radius: 32px;
+  background: var(--surface);
+}
+
+.port-well.is-holding {
+  border-style: solid;
+  border-color: var(--primary);
+}
+
+.port-label {
+  color: var(--ink-muted);
+  font-weight: 800;
+}
+
+.port-chip {
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: var(--primary);
+}
+
+.port-go {
+  justify-self: center;
+  min-height: 56px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.port-go:hover {
+  background: var(--primary-hover);
+}
+
+.os-card:focus-visible,
+.hero-download:focus-visible,
+.install-go:focus-visible,
+.port-go:focus-visible,
+.hero__other:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (min-width: 720px) {
+  .port {
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .feature {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 64px;
+  }
+
+  .feature--flip .feature__copy {
+    order: 2;
+  }
+}
+
+@media (min-width: 980px) {
+  .hero h1 {
+    font-size: clamp(4.4rem, 7vw, 6.6rem);
+  }
+
+  .hero__actions {
+    flex-wrap: wrap;
+  }
+
+  .hero__actions .hero-download {
+    min-height: 68px;
+    padding: 0 36px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .install-command__row .MuiButton-root {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .feature:not(.is-in),
+  html.js .install-panel:not(.is-in),
+  html.js .roadmap:not(.is-in) li,
+  html.js .port:not(.is-in) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .feature.is-in,
+  .install-panel.is-in,
+  .roadmap.is-in li,
+  .port.is-in {
+    animation: rise-in 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .roadmap.is-in li:nth-child(2) {
+    animation-delay: 60ms;
+  }
+
+  .roadmap.is-in li:nth-child(3) {
+    animation-delay: 120ms;
+  }
+
+  .roadmap.is-in li:nth-child(4) {
+    animation-delay: 180ms;
+  }
+
+  .port-chip {
+    animation: rise-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

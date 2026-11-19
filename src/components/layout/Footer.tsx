@@ -10,18 +10,22 @@ export function Footer() {
         <div className="site-footer__brand">
           <Logo />
           <strong translate="no">{site.name}</strong>
+          <p className="site-footer__note">{ui.footer.note}</p>
         </div>
-        <nav aria-label={ui.nav.footer}>
+        <nav aria-label={ui.nav.primary}>
           <Link to="/">{ui.nav.home}</Link>
+          <Link to="/install">{ui.nav.install}</Link>
           <Link to="/docs">{ui.nav.docs}</Link>
+        </nav>
+        <nav aria-label={ui.nav.footer}>
           <a href={site.githubUrl} target="_blank" rel="noreferrer">
             {ui.nav.github}
           </a>
           <a href={site.telegramUrl} target="_blank" rel="noreferrer">
             {ui.nav.telegram}
           </a>
+          <a href={site.licenseUrl}>{site.license}</a>
         </nav>
-        <p className="site-footer__note">{ui.footer.note}</p>
       </div>
     </footer>
   )

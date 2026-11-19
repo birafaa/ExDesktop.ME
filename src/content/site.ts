@@ -29,6 +29,11 @@ export const site = {
   placeholders: {
     requirements: "[требования]",
     interactive: "[название блока]",
-    roadmap: ["[этап 1]", "[этап 2]", "[этап 3]", "[этап 4]"],
+    roadmap: [
+      "[этап 1]",
+      "[этап 2]",
+      "[этап 3]",
+      "[этап 4]",
+    ],
   },
 } as const

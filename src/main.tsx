@@ -7,6 +7,7 @@ import "./styles/global.css"
 import "./styles/install.css"
 import "./styles/home-sections.css"
 import "./styles/channel.css"
+import "./styles/home.css"
 import App from "./App.tsx"
 
 createRoot(document.getElementById("root")!).render(
