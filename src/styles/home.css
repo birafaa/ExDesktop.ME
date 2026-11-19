@@ -174,10 +174,21 @@
 
 .diff-list {
   display: grid;
-  gap: 88px;
+  gap: 72px;
+}
+
+.diff-track {
+  min-width: 0;
+}
+
+.diff-spacer {
+  height: 130vh;
+  pointer-events: none;
 }
 
 .diff-row {
+  position: sticky;
+  top: 12px;
   display: grid;
   gap: 28px;
   min-width: 0;
@@ -520,8 +531,11 @@
 }
 
 .os-check {
-  display: none;
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
   color: var(--status);
+  opacity: 0;
 }
 
 .vignette--sandbox {
@@ -623,10 +637,15 @@
   }
 
   .diff-list {
-    gap: 112px;
+    gap: 96px;
+  }
+
+  .diff-spacer {
+    height: 140vh;
   }
 
   .diff-row {
+    top: clamp(16px, 8vh, 72px);
     grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
     grid-template-areas: "copy panel";
     gap: 48px;
@@ -643,7 +662,8 @@
     width: 100%;
   }
 
-  .diff-row:nth-child(even) {
+  .diff-row--1,
+  .diff-row--3 {
     grid-template-columns: minmax(0, 0.6fr) minmax(0, 0.4fr);
     grid-template-areas: "panel copy";
     --from: -36px;
@@ -688,243 +708,103 @@
   }
 }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .diff-row {
-      view-timeline-axis: block;
-    }
-
-    .diff-row--0 {
-      view-timeline-name: --f0;
-    }
-
-    .diff-row--1 {
-      view-timeline-name: --f1;
-    }
-
-    .diff-row--2 {
-      view-timeline-name: --f2;
-    }
-
-    .diff-row--3 {
-      view-timeline-name: --f3;
-    }
-
-    .diff-copy,
-    .diff-panel,
-    .vig-switch__on,
-    .vig-switch i,
-    .vig-mover,
-    .vig-track i,
-    .vig-check,
-    .vig-spark,
-    .os-frame,
-    .ok-dot,
-    .os-check,
-    .probe,
-    .vig-blocked li,
-    .vig-shield {
-      animation-timing-function: linear;
-      animation-fill-mode: both;
-    }
-
-    .diff-row--0 :is(.diff-copy, .diff-panel, .vig-switch__on, .vig-switch i, .vig-mover, .vig-track i, .vig-check, .vig-spark, .os-frame, .ok-dot, .os-check, .probe, .vig-blocked li, .vig-shield) {
-      animation-timeline: --f0;
-    }
-
-    .diff-row--1 :is(.diff-copy, .diff-panel, .vig-switch__on, .vig-switch i, .vig-mover, .vig-track i, .vig-check, .vig-spark, .os-frame, .ok-dot, .os-check, .probe, .vig-blocked li, .vig-shield) {
-      animation-timeline: --f1;
-    }
-
-    .diff-row--2 :is(.diff-copy, .diff-panel, .vig-switch__on, .vig-switch i, .vig-mover, .vig-track i, .vig-check, .vig-spark, .os-frame, .ok-dot, .os-check, .probe, .vig-blocked li, .vig-shield) {
-      animation-timeline: --f2;
-    }
-
-    .diff-row--3 :is(.diff-copy, .diff-panel, .vig-switch__on, .vig-switch i, .vig-mover, .vig-track i, .vig-check, .vig-spark, .os-frame, .ok-dot, .os-check, .probe, .vig-blocked li, .vig-shield) {
-      animation-timeline: --f3;
-    }
-
-    .diff-copy {
-      animation-name: copy-in;
-      animation-range: entry 0% cover 40%;
-    }
-
-    .diff-panel {
-      animation-name: panel-in;
-      animation-range: entry 8% cover 52%;
-    }
-
-    .vig-switch__on {
-      animation-name: switch-on;
-    }
-
-    .vig-switch i {
-      animation-name: switch-thumb;
-    }
-
-    .vig-list li:nth-child(1) .vig-switch__on,
-    .vig-list li:nth-child(1) .vig-switch i {
-      animation-range: cover 12% cover 28%;
-    }
-
-    .vig-list li:nth-child(2) .vig-switch__on,
-    .vig-list li:nth-child(2) .vig-switch i {
-      animation-range: cover 24% cover 42%;
-    }
-
-    .vig-list li:nth-child(3) .vig-switch__on,
-    .vig-list li:nth-child(3) .vig-switch i {
-      animation-range: cover 36% cover 54%;
-    }
-
-    .vig-list li:nth-child(4) .vig-switch__on,
-    .vig-list li:nth-child(4) .vig-switch i {
-      animation-range: cover 48% cover 66%;
-    }
-
-    .vig-mover,
-    .vig-track i {
-      animation-range: cover 16% cover 70%;
-    }
-
-    .vig-mover {
-      animation-name: chip-travel;
-    }
-
-    .vig-track i {
-      animation-name: bar-fill;
-    }
-
-    .vig-check {
-      animation-name: check-pop;
-      animation-range: cover 66% cover 84%;
-    }
-
-    .vig-spark {
-      animation-name: spark-pulse;
-      animation-range: cover 12% cover 78%;
-    }
-
-    .os-frame {
-      animation-name: os-pop;
-    }
-
-    .os-frame:nth-child(1) {
-      animation-range: cover 10% cover 30%;
-    }
-
-    .os-frame:nth-child(2) {
-      animation-range: cover 22% cover 42%;
-    }
-
-    .os-frame:nth-child(3) {
-      animation-range: cover 34% cover 54%;
-    }
-
-    .ok-dot {
-      animation-name: dot-pulse;
-    }
-
-    .os-check {
-      display: block;
-      animation-name: check-pop;
-    }
-
-    .os-frame:nth-child(1) .ok-dot,
-    .os-frame:nth-child(1) .os-check {
-      animation-range: cover 28% cover 46%;
-    }
-
-    .os-frame:nth-child(2) .ok-dot,
-    .os-frame:nth-child(2) .os-check {
-      animation-range: cover 40% cover 58%;
-    }
-
-    .os-frame:nth-child(3) .ok-dot,
-    .os-frame:nth-child(3) .os-check {
-      animation-range: cover 52% cover 70%;
-    }
-
-    .probe {
-      animation-name: probe-out;
-    }
-
-    .vig-blocked li {
-      animation-name: chip-shake;
-    }
-
-    .vig-shield {
-      animation-name: shield-pulse;
-      animation-range: cover 28% cover 72%;
-    }
-
-    .probe:nth-child(1),
-    .vig-blocked li:nth-child(1) {
-      animation-range: cover 18% cover 58%;
-    }
-
-    .probe:nth-child(2),
-    .vig-blocked li:nth-child(2) {
-      animation-range: cover 32% cover 70%;
-    }
-
-    .probe:nth-child(3),
-    .vig-blocked li:nth-child(3) {
-      animation-range: cover 44% cover 82%;
-    }
-  }
+html.scroll-motion .diff-row {
+  --p: 0;
+  --travel: clamp(0, (var(--p) - 0.24) / 0.52, 1);
+  --chip-fade: clamp(0, (var(--p) - 0.74) / 0.16, 1);
 }
 
-html.no-scroll-timeline .diff-copy {
-  opacity: clamp(0, var(--p) * 2.5, 1);
-  transform: translateY(calc(18px * (1 - min(var(--p) * 2.5, 1))));
+html.scroll-motion .diff-copy {
+  --t: clamp(0, var(--p) / 0.16, 1);
+  opacity: var(--t);
+  transform: translateY(calc(18px * (1 - var(--t))));
 }
 
-html.no-scroll-timeline .diff-panel {
-  opacity: clamp(0, calc((var(--p) - 0.08) * 2.6), 1);
-  transform: translateX(calc(var(--from) * (1 - min(max((var(--p) - 0.08) * 2.6, 0), 1))));
+html.scroll-motion .diff-panel {
+  --t: clamp(0, (var(--p) - 0.04) / 0.18, 1);
+  opacity: var(--t);
+  transform: translateX(calc(var(--from) * (1 - var(--t))));
 }
 
-html.no-scroll-timeline .vig-switch__on {
-  opacity: clamp(0, calc((var(--p) - 0.12 - var(--n) * 0.1) * 6), 1);
+html.scroll-motion .vig-switch__on {
+  opacity: clamp(0, (var(--p) - 0.2 - var(--n) * 0.14) / 0.16, 1);
 }
 
-html.no-scroll-timeline .vig-switch i {
-  transform: translateX(calc(20px * clamp(0, (var(--p) - 0.12 - var(--n) * 0.1) * 6, 1)));
+html.scroll-motion .vig-switch i {
+  transform: translateX(calc(20px * clamp(0, (var(--p) - 0.2 - var(--n) * 0.14) / 0.16, 1)));
 }
 
-html.no-scroll-timeline .vig-track i {
-  transform: scaleX(clamp(0, (var(--p) - 0.16) * 1.8, 1));
+html.scroll-motion .vig-track i {
+  transform: scaleX(var(--travel));
 }
 
-html.no-scroll-timeline .vig-mover {
-  --travel: clamp(0, (var(--p) - 0.16) * 1.8, 1);
-  --fade: clamp(0, (var(--p) - 0.64) * 6, 1);
-  opacity: calc(1 - var(--fade));
-  transform: translateX(calc((100cqi - var(--side, 34.5%) - 92px) * var(--travel))) scale(calc(1 - 0.3 * var(--fade)));
+html.scroll-motion .vig-mover {
+  opacity: calc(1 - var(--chip-fade));
+  transform: translateX(calc((100cqi - var(--side, 34.5%) - 92px) * var(--travel))) scale(calc(1 - 0.3 * var(--chip-fade)));
 }
 
-html.no-scroll-timeline .vig-check,
-html.no-scroll-timeline .os-check {
-  display: block;
-  opacity: clamp(0, calc((var(--p) - 0.62 - var(--n, 0) * 0.08) * 8), 1);
-  transform: scale(clamp(0.6, 0.6 + (var(--p) - 0.62) * 2, 1));
+html.scroll-motion .vig-check {
+  --t: clamp(0, (var(--p) - 0.8) / 0.14, 1);
+  opacity: var(--t);
+  transform: scale(calc(0.6 + 0.4 * var(--t)));
 }
 
-html.no-scroll-timeline .os-frame {
-  opacity: clamp(0, calc((var(--p) - var(--n) * 0.1) * 4), 1);
-  transform: translateY(calc(8px * (1 - min(max((var(--p) - var(--n) * 0.1) * 4, 0), 1))));
+html.scroll-motion .vig-spark {
+  --t: clamp(0, (var(--p) - 0.2) / 0.62, 1);
+  transform: scale(calc(1 + 0.18 * sin(calc(var(--t) * 180deg))));
 }
 
-html.no-scroll-timeline .ok-dot {
-  opacity: clamp(0.35, calc(0.35 + (var(--p) - 0.28 - var(--n) * 0.1) * 3), 1);
-  transform: scale(clamp(0.7, 0.7 + (var(--p) - 0.28 - var(--n) * 0.1) * 1.4, 1));
+html.scroll-motion .os-frame {
+  --t: clamp(0, (var(--p) - 0.18 - var(--n) * 0.14) / 0.2, 1);
+  opacity: var(--t);
+  transform: translateY(calc(10px * (1 - var(--t)))) scale(calc(0.96 + 0.04 * var(--t)));
+}
+
+html.scroll-motion .ok-dot {
+  --t: clamp(0, (var(--p) - 0.3 - var(--n) * 0.14) / 0.18, 1);
+  opacity: calc(0.35 + 0.65 * var(--t));
+  transform: scale(calc(0.7 + 0.3 * var(--t)));
+}
+
+html.scroll-motion .os-check {
+  --t: clamp(0, (var(--p) - 0.34 - var(--n) * 0.14) / 0.16, 1);
+  opacity: var(--t);
+  transform: scale(calc(0.6 + 0.4 * var(--t)));
+}
+
+html.scroll-motion .probe {
+  --t: clamp(0, (var(--p) - 0.2 - var(--n) * 0.14) / 0.4, 1);
+  --arc: sin(calc(var(--t) * 180deg));
+  opacity: var(--arc);
+  transform: translate(calc(var(--dx) * var(--arc)), calc(-42px * var(--arc)));
+}
+
+html.scroll-motion .vig-blocked li {
+  --t: clamp(0, (var(--p) - 0.2 - var(--n) * 0.14) / 0.4, 1);
+  transform: translateX(calc(sin(calc(var(--t) * 720deg)) * 2px * sin(calc(var(--t) * 180deg))));
+}
+
+html.scroll-motion .vig-shield {
+  --t: clamp(0, (var(--p) - 0.28) / 0.48, 1);
+  transform: scale(calc(1 + 0.14 * sin(calc(var(--t) * 180deg))));
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .diff-spacer {
+    display: none;
+  }
+
+  .diff-row {
+    position: relative;
+    top: auto;
+  }
+
   .diff-copy,
   .diff-panel,
-  .os-frame {
+  .os-frame,
+  .vig-blocked li,
+  .vig-spark,
+  .vig-shield {
     opacity: 1;
     transform: none;
   }
@@ -949,7 +829,6 @@ html.no-scroll-timeline .ok-dot {
 
   .vig-check,
   .os-check {
-    display: block;
     opacity: 1;
     transform: none;
   }
@@ -961,27 +840,6 @@ html.no-scroll-timeline .ok-dot {
 
   .probe {
     opacity: 0;
-  }
-}
-
-@keyframes copy-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes panel-in {
-  from {
-    opacity: 0;
-    transform: translateX(var(--from));
-  }
-  to {
-    opacity: 1;
     transform: none;
   }
 }
@@ -1019,141 +877,3 @@ html.no-scroll-timeline .ok-dot {
   }
 }
 
-@keyframes switch-on {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes switch-thumb {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(20px);
-  }
-}
-
-@keyframes chip-travel {
-  0% {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-  78% {
-    opacity: 1;
-    transform: translateX(calc(100cqi - var(--side, 34.5%) - 92px)) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(calc(100cqi - var(--side, 34.5%) - 92px)) scale(0.7);
-  }
-}
-
-@keyframes bar-fill {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes check-pop {
-  from {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes spark-pulse {
-  0% {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  55% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes os-pop {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes dot-pulse {
-  from {
-    opacity: 0.35;
-    transform: scale(0.7);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes probe-out {
-  0%,
-  10% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  24% {
-    opacity: 1;
-  }
-  46% {
-    opacity: 1;
-    transform: translate(var(--dx), -42px);
-  }
-  56% {
-    transform: translate(var(--dx), -32px);
-  }
-  82%,
-  100% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes chip-shake {
-  0%,
-  40%,
-  68%,
-  100% {
-    transform: none;
-  }
-  48% {
-    transform: translateX(-2px) rotate(-3deg);
-  }
-  56% {
-    transform: translateX(2px) rotate(3deg);
-  }
-}
-
-@keyframes shield-pulse {
-  0%,
-  38%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.14);
-  }
-}

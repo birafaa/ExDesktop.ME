@@ -4,7 +4,7 @@ import ExtensionIcon from "@mui/icons-material/Extension"
 import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined"
-import { useEffect, type CSSProperties } from "react"
+import { useLayoutEffect, type CSSProperties } from "react"
 import { home } from "../../content/home.ts"
 import { BrandIcon } from "../brand/BrandIcon.tsx"
 import { brandPaths } from "../brand/brand-paths.ts"
@@ -12,37 +12,82 @@ import { Logo } from "../brand/Logo.tsx"
 import { SectionHeading } from "../SectionHeading.tsx"
 
 function useScrollProgress() {
-  useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const supported = CSS.supports("animation-timeline: view()")
-    if (reduce || supported) return
-
-    document.documentElement.classList.add("no-scroll-timeline")
-    const rows = () => document.querySelectorAll<HTMLElement>(".diff-row")
+  useLayoutEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const root = document.documentElement
+    const tracks = () => document.querySelectorAll<HTMLElement>(".diff-track")
+    const shown = new WeakMap<HTMLElement, number>()
     let frame = 0
-    const update = () => {
-      frame = 0
-      const viewHeight = window.innerHeight
-      rows().forEach((row) => {
-        const rect = row.getBoundingClientRect()
-        const start = viewHeight * 0.92
-        const end = viewHeight * 0.18
-        const distance = start - end + rect.height
-        const progress = (start - rect.top) / distance
-        row.style.setProperty("--p", String(Math.min(1, Math.max(0, progress))))
+    let running = false
+
+    const paint = () => {
+      const view = window.innerHeight
+      tracks().forEach((track) => {
+        const row = track.querySelector<HTMLElement>(".diff-row")
+        if (!row) return
+        const rect = track.getBoundingClientRect()
+        const pin = row.offsetHeight
+        const top = Number.parseFloat(getComputedStyle(row).top) || 0
+        const stuck = Math.max(1, track.offsetHeight - pin)
+        const total = Math.max(1, view - top + stuck)
+        const target = Math.min(1, Math.max(0, (view - rect.top) / total))
+        const prev = shown.get(row)
+        const from = prev ?? target
+        const next = Math.abs(target - from) < 0.0006 ? target : from + (target - from) * 0.1
+        shown.set(row, next)
+        if (prev === undefined || Math.abs(next - prev) > 0.0004) {
+          row.style.setProperty("--p", next.toFixed(4))
+        }
       })
     }
-    const request = () => {
-      if (frame) return
-      frame = window.requestAnimationFrame(update)
+
+    const tick = () => {
+      frame = 0
+      if (!running) return
+      paint()
+      frame = window.requestAnimationFrame(tick)
     }
-    update()
-    window.addEventListener("scroll", request, { passive: true })
-    window.addEventListener("resize", request)
-    return () => {
-      window.removeEventListener("scroll", request)
-      window.removeEventListener("resize", request)
+
+    const start = () => {
+      if (media.matches || running) return
+      running = true
+      root.classList.add("scroll-motion")
+      paint()
+      if (!document.hidden) frame = window.requestAnimationFrame(tick)
+    }
+
+    const stop = () => {
+      running = false
       if (frame) window.cancelAnimationFrame(frame)
+      frame = 0
+      root.classList.remove("scroll-motion")
+      document.querySelectorAll<HTMLElement>(".diff-row").forEach((row) => {
+        shown.delete(row)
+        row.style.removeProperty("--p")
+      })
+    }
+
+    const onMedia = () => {
+      stop()
+      start()
+    }
+
+    const onHide = () => {
+      if (document.hidden) {
+        if (frame) window.cancelAnimationFrame(frame)
+        frame = 0
+        return
+      }
+      if (running && frame === 0) frame = window.requestAnimationFrame(tick)
+    }
+
+    start()
+    media.addEventListener("change", onMedia)
+    document.addEventListener("visibilitychange", onHide)
+    return () => {
+      media.removeEventListener("change", onMedia)
+      document.removeEventListener("visibilitychange", onHide)
+      stop()
     }
   }, [])
 }
@@ -186,16 +231,19 @@ function Feature({
 }) {
   const View = views[title]
   return (
-    <article className={`diff-row diff-row--${index}`} style={{ "--i": index, "--p": 1 } as CSSProperties}>
-      <div className="diff-copy">
-        <span className="diff-index">{String(index + 1).padStart(2, "0")}</span>
-        <h3>{title}</h3>
-        <p>{body}</p>
-      </div>
-      <div className="diff-panel">
-        <View />
-      </div>
-    </article>
+    <div className="diff-track">
+      <article className={`diff-row diff-row--${index}`} style={{ "--i": index } as CSSProperties}>
+        <div className="diff-copy">
+          <span className="diff-index">{String(index + 1).padStart(2, "0")}</span>
+          <h3>{title}</h3>
+          <p>{body}</p>
+        </div>
+        <div className="diff-panel">
+          <View />
+        </div>
+      </article>
+      <div className="diff-spacer" aria-hidden="true" />
+    </div>
   )
 }
 
