@@ -17,14 +17,16 @@ export function OsTabs({
   os,
   onChange,
   label,
+  variant = "cards",
 }: {
   os: OsId
   onChange: (id: OsId) => void
   label: string
+  variant?: "cards" | "pills"
 }) {
   return (
     <div
-      className="os-cards"
+      className={variant === "pills" ? "os-cards os-cards--pills" : "os-cards"}
       role="radiogroup"
       aria-label={label}
       style={{ "--os-index": order.indexOf(os) } as CSSProperties}

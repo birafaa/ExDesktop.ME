@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { InstallAction } from "../components/install/InstallAction.tsx"
+import { InstallStage } from "../components/install/InstallStage.tsx"
 import { OsTabs } from "../components/install/OsTabs.tsx"
 import { install, type OsId } from "../content/install.ts"
 import { site } from "../content/site.ts"
@@ -18,23 +18,20 @@ export function InstallPage() {
   const queried = osFromQuery(params.get("os"))
   const [fallback] = useState(detectOs)
   const os = queried ?? fallback
-  const system = install.systems[os]
 
   return (
     <article className="install-page">
-      <div className="wrap install-simple">
+      <span className="hero__shape hero__shape--a" aria-hidden="true" />
+      <span className="hero__shape hero__shape--b" aria-hidden="true" />
+      <div className="wrap install-hero">
         <h1>{install.title}</h1>
         <OsTabs
           os={os}
+          variant="pills"
           label={install.osLabel}
           onChange={(id) => setParams({ os: id }, { replace: true })}
         />
-        <InstallAction os={os} />
-        <ol className="install-steps">
-          {system.steps.map((step) => (
-            <li key={step}>{step}</li>
-          ))}
-        </ol>
+        <InstallStage os={os} />
       </div>
     </article>
   )

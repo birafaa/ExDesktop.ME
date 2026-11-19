@@ -1,19 +1,24 @@
 .install-page {
-  padding: var(--section-y) 0 72px;
+  position: relative;
+  overflow: clip;
+  padding: clamp(28px, 5vw, 64px) 0 80px;
+  text-align: center;
 }
 
-.install-simple {
-  max-width: 880px;
+.install-hero {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
 }
 
-.install-simple h1 {
+.install-hero h1 {
   margin: 0;
   font-family: "Unbounded Variable", Unbounded, sans-serif;
-  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-size: clamp(3rem, 10vw, 6.4rem);
   font-weight: 700;
   letter-spacing: -0.045em;
-  line-height: 1.05;
-  text-align: center;
+  line-height: 1.02;
 }
 
 .os-cards {
@@ -134,45 +139,192 @@
   min-width: 0;
 }
 
+.os-cards--pills {
+  display: inline-grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100%, 520px);
+  margin-top: 28px;
+  padding: 4px;
+  gap: 4px;
+  border-radius: 999px;
+  background: var(--surface-container);
+}
+
+.os-cards--pills .os-cards__indicator {
+  top: 4px;
+  left: 4px;
+  width: calc((100% - 16px) / 3);
+  height: calc(100% - 8px);
+  border-radius: 999px;
+  transform: translateX(calc(var(--os-index) * (100% + 4px)));
+}
+
+.os-cards--pills .os-card {
+  min-width: 0;
+  min-height: 48px;
+  flex-direction: row;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 1rem;
+}
+
+.os-cards--pills .os-card .MuiSvgIcon-root {
+  font-size: 22px;
+}
+
+@media (max-width: 420px) {
+  .os-cards--pills .os-card {
+    gap: 4px;
+    padding-inline: 6px;
+    font-size: 0.86rem;
+  }
+
+  .os-cards--pills .os-card .MuiSvgIcon-root {
+    font-size: 18px;
+  }
+}
+
+.os-cards--pills .os-card:hover:not(.is-selected) {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.install-stage {
+  display: grid;
+  justify-items: center;
+  width: min(760px, 100%);
+  min-width: 0;
+  margin-top: 36px;
+}
+
+.install-win,
+.install-term {
+  width: 100%;
+  min-width: 0;
+  padding: 18px 18px 22px;
+  border: 1px solid var(--outline-variant);
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.install-win {
+  display: grid;
+  justify-items: center;
+}
+
+.install-win__bar,
+.install-term__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 22px;
+}
+
+.install-win__bar i,
+.install-term__bar i {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--outline-variant);
+}
+
+.install-win__bar i:first-child,
+.install-term__bar i:first-child {
+  background: var(--primary);
+}
+
+.install-win__bar b {
+  min-width: 0;
+  overflow: hidden;
+  margin-left: 6px;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.install-win .install-go {
+  min-height: 68px;
+  padding: 0 36px;
+  font-size: 1.25rem;
+}
+
+.install-term .install-command__row {
+  width: 100%;
+  margin: 0;
+}
+
 .install-steps {
   display: grid;
-  gap: 8px;
+  gap: 12px;
+  width: min(920px, 100%);
   margin: 28px 0 0;
   padding: 0;
   list-style: none;
-  counter-reset: step;
 }
 
 .install-steps li {
-  counter-increment: step;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-height: 76px;
+  padding: 14px 16px;
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow-lift);
   color: var(--ink);
-  font-weight: 700;
+  font-weight: 800;
+  text-align: left;
 }
 
-.install-steps li::before {
-  content: counter(step) ". ";
+.install-steps__n {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 0.95rem;
+}
+
+.install-steps .MuiSvgIcon-root {
   color: var(--primary);
+  font-size: 22px;
 }
 
 @media (min-width: 720px) {
   .install-steps {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .install-stage {
+    animation: install-swap 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 }
 
 @media (max-width: 719px) {
-  .os-cards {
+  .os-cards:not(.os-cards--pills) {
     grid-template-columns: 1fr;
   }
 
-  .os-cards__indicator {
+  .os-cards:not(.os-cards--pills) .os-cards__indicator {
     width: 100%;
     height: calc((100% - 24px) / 3);
     transform: translateY(calc(var(--os-index) * (100% + 12px)));
   }
 
-  .os-card {
+  .os-cards:not(.os-cards--pills) .os-card {
     min-height: 76px;
     flex-direction: row;
     justify-content: flex-start;
