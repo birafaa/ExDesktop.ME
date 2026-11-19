@@ -20,4 +20,15 @@ export const site = {
   telegramUrl: "https://t.me/exDesktop",
   siteUrl: "https://exdesktop.xyz",
   platforms: ["Windows", "Linux", "macOS"],
+  downloadLabel: {
+    windows: "Скачать для Windows",
+    macos: "Скачать для macOS",
+    linux: "Установить на Linux",
+  },
+  otherPlatforms: "Другие платформы",
+  placeholders: {
+    requirements: "[требования]",
+    interactive: "[название блока]",
+    roadmap: ["[этап 1]", "[этап 2]", "[этап 3]", "[этап 4]"],
+  },
 } as const
