@@ -674,184 +674,259 @@
   }
 }
 
-.vig-switch.is-held .vig-switch__on {
-  opacity: 1;
-}
-
-.vig-switch.is-held i {
-  transform: translateX(20px);
-  background: var(--on-primary);
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  html.js .diff-row:not(.is-in) .diff-copy,
-  html.js .diff-row:not(.is-in) .diff-panel,
-  html.js .install-panel:not(.is-in) {
-    opacity: 0;
-  }
-
-  html.js .diff-row:not(.is-in) .diff-copy {
-    transform: translateY(18px);
-  }
-
-  html.js .diff-row:not(.is-in) .diff-panel {
-    transform: translateX(var(--from));
-  }
-
-  .diff-row.is-in .diff-copy {
-    animation: copy-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(var(--i) * 40ms);
-  }
-
-  .diff-row.is-in .diff-panel {
-    animation: panel-in 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(var(--i) * 40ms + 60ms);
-  }
-
   .install-panel.is-in {
     animation: rise-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
+}
 
-  .diff-row.is-live .vig-list li {
-    animation: row-in 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(var(--n) * 80ms);
-  }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .diff-row {
+      view-timeline-axis: block;
+    }
 
-  .vig-lines i {
-    position: relative;
-    overflow: hidden;
-  }
+    .diff-row--0 {
+      view-timeline-name: --f0;
+    }
 
-  .vig-lines i::after {
-    content: "";
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 42%;
-    background: color-mix(in srgb, var(--surface) 72%, transparent);
-    transform: translateX(-140%);
-    animation: vig-shimmer 2.4s ease-in-out infinite;
-    animation-play-state: paused;
-  }
+    .diff-row--1 {
+      view-timeline-name: --f1;
+    }
 
-  .diff-row.is-live .vig-lines i::after {
-    animation-play-state: running;
-  }
+    .diff-row--2 {
+      view-timeline-name: --f2;
+    }
 
-  .vig-switch__on,
-  .vig-switch i {
-    animation-duration: 3.8s;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    animation-iteration-count: infinite;
-    animation-delay: calc(var(--n) * 0.42s);
-    animation-play-state: paused;
-  }
+    .diff-row--3 {
+      view-timeline-name: --f3;
+    }
 
-  .vig-switch__on {
-    animation-name: switch-on;
-  }
+    .diff-copy,
+    .diff-panel,
+    .vig-switch__on,
+    .vig-switch i,
+    .vig-mover,
+    .vig-track i,
+    .vig-check,
+    .vig-spark,
+    .os-frame,
+    .ok-dot,
+    .os-check,
+    .probe,
+    .vig-blocked li,
+    .vig-shield {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
 
-  .vig-switch i {
-    animation-name: switch-thumb;
-  }
+    .diff-row--0 :is(.diff-copy, .diff-panel, .vig-switch__on, .vig-switch i, .vig-mover, .vig-track i, .vig-check, .vig-spark, .os-frame, .ok-dot, .os-check, .probe, .vig-blocked li, .vig-shield) {
+      animation-timeline: --f0;
+    }
 
-  .diff-row.is-live .vig-switch__on,
-  .diff-row.is-live .vig-switch i {
-    animation-play-state: running;
-  }
+    .diff-row--1 :is(.diff-copy, .diff-panel, .vig-switch__on, .vig-switch i, .vig-mover, .vig-track i, .vig-check, .vig-spark, .os-frame, .ok-dot, .os-check, .probe, .vig-blocked li, .vig-shield) {
+      animation-timeline: --f1;
+    }
 
-  .vig-mover,
-  .vig-track i,
-  .vig-check,
-  .vig-spark {
-    animation-duration: 4.6s;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    animation-iteration-count: infinite;
-    animation-play-state: paused;
-  }
+    .diff-row--2 :is(.diff-copy, .diff-panel, .vig-switch__on, .vig-switch i, .vig-mover, .vig-track i, .vig-check, .vig-spark, .os-frame, .ok-dot, .os-check, .probe, .vig-blocked li, .vig-shield) {
+      animation-timeline: --f2;
+    }
 
-  .vig-mover {
-    animation-name: chip-travel;
-  }
+    .diff-row--3 :is(.diff-copy, .diff-panel, .vig-switch__on, .vig-switch i, .vig-mover, .vig-track i, .vig-check, .vig-spark, .os-frame, .ok-dot, .os-check, .probe, .vig-blocked li, .vig-shield) {
+      animation-timeline: --f3;
+    }
 
-  .vig-track i {
-    animation-name: bar-fill;
-  }
+    .diff-copy {
+      animation-name: copy-in;
+      animation-range: entry 0% cover 40%;
+    }
 
-  .vig-check {
-    animation-name: check-pop;
-  }
+    .diff-panel {
+      animation-name: panel-in;
+      animation-range: entry 8% cover 52%;
+    }
 
-  .vig-spark {
-    animation-name: spark-pulse;
-    animation-duration: 1.6s;
-  }
+    .vig-switch__on {
+      animation-name: switch-on;
+    }
 
-  .diff-row.is-live .vig-mover,
-  .diff-row.is-live .vig-track i,
-  .diff-row.is-live .vig-check,
-  .diff-row.is-live .vig-spark {
-    animation-play-state: running;
-  }
+    .vig-switch i {
+      animation-name: switch-thumb;
+    }
 
-  .diff-row.is-live .os-frame {
-    animation: os-pop 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(var(--n) * 120ms);
-  }
+    .vig-list li:nth-child(1) .vig-switch__on,
+    .vig-list li:nth-child(1) .vig-switch i {
+      animation-range: cover 12% cover 28%;
+    }
 
-  .ok-dot,
-  .os-check {
-    animation-duration: 4.2s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-delay: calc(var(--n) * 0.45s);
-    animation-play-state: paused;
-  }
+    .vig-list li:nth-child(2) .vig-switch__on,
+    .vig-list li:nth-child(2) .vig-switch i {
+      animation-range: cover 24% cover 42%;
+    }
 
-  .ok-dot {
-    animation-name: dot-pulse;
-  }
+    .vig-list li:nth-child(3) .vig-switch__on,
+    .vig-list li:nth-child(3) .vig-switch i {
+      animation-range: cover 36% cover 54%;
+    }
 
-  .os-check {
-    display: block;
-    animation-name: check-pop;
-  }
+    .vig-list li:nth-child(4) .vig-switch__on,
+    .vig-list li:nth-child(4) .vig-switch i {
+      animation-range: cover 48% cover 66%;
+    }
 
-  .diff-row.is-live .ok-dot,
-  .diff-row.is-live .os-check {
-    animation-play-state: running;
-  }
+    .vig-mover,
+    .vig-track i {
+      animation-range: cover 16% cover 70%;
+    }
 
-  .probe,
-  .vig-blocked li,
-  .vig-shield {
-    animation-duration: 3.8s;
-    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
-    animation-iteration-count: infinite;
-    animation-delay: calc(var(--n) * 0.42s);
-    animation-play-state: paused;
-  }
+    .vig-mover {
+      animation-name: chip-travel;
+    }
 
-  .probe {
-    animation-name: probe-out;
-  }
+    .vig-track i {
+      animation-name: bar-fill;
+    }
 
-  .vig-blocked li {
-    animation-name: chip-shake;
-  }
+    .vig-check {
+      animation-name: check-pop;
+      animation-range: cover 66% cover 84%;
+    }
 
-  .vig-shield {
-    animation-name: shield-pulse;
-    animation-delay: 0.7s;
-  }
+    .vig-spark {
+      animation-name: spark-pulse;
+      animation-range: cover 12% cover 78%;
+    }
 
-  .diff-row.is-live .probe,
-  .diff-row.is-live .vig-blocked li,
-  .diff-row.is-live .vig-shield {
-    animation-play-state: running;
+    .os-frame {
+      animation-name: os-pop;
+    }
+
+    .os-frame:nth-child(1) {
+      animation-range: cover 10% cover 30%;
+    }
+
+    .os-frame:nth-child(2) {
+      animation-range: cover 22% cover 42%;
+    }
+
+    .os-frame:nth-child(3) {
+      animation-range: cover 34% cover 54%;
+    }
+
+    .ok-dot {
+      animation-name: dot-pulse;
+    }
+
+    .os-check {
+      display: block;
+      animation-name: check-pop;
+    }
+
+    .os-frame:nth-child(1) .ok-dot,
+    .os-frame:nth-child(1) .os-check {
+      animation-range: cover 28% cover 46%;
+    }
+
+    .os-frame:nth-child(2) .ok-dot,
+    .os-frame:nth-child(2) .os-check {
+      animation-range: cover 40% cover 58%;
+    }
+
+    .os-frame:nth-child(3) .ok-dot,
+    .os-frame:nth-child(3) .os-check {
+      animation-range: cover 52% cover 70%;
+    }
+
+    .probe {
+      animation-name: probe-out;
+    }
+
+    .vig-blocked li {
+      animation-name: chip-shake;
+    }
+
+    .vig-shield {
+      animation-name: shield-pulse;
+      animation-range: cover 28% cover 72%;
+    }
+
+    .probe:nth-child(1),
+    .vig-blocked li:nth-child(1) {
+      animation-range: cover 18% cover 58%;
+    }
+
+    .probe:nth-child(2),
+    .vig-blocked li:nth-child(2) {
+      animation-range: cover 32% cover 70%;
+    }
+
+    .probe:nth-child(3),
+    .vig-blocked li:nth-child(3) {
+      animation-range: cover 44% cover 82%;
+    }
   }
 }
 
+html.no-scroll-timeline .diff-copy {
+  opacity: clamp(0, var(--p) * 2.5, 1);
+  transform: translateY(calc(18px * (1 - min(var(--p) * 2.5, 1))));
+}
+
+html.no-scroll-timeline .diff-panel {
+  opacity: clamp(0, calc((var(--p) - 0.08) * 2.6), 1);
+  transform: translateX(calc(var(--from) * (1 - min(max((var(--p) - 0.08) * 2.6, 0), 1))));
+}
+
+html.no-scroll-timeline .vig-switch__on {
+  opacity: clamp(0, calc((var(--p) - 0.12 - var(--n) * 0.1) * 6), 1);
+}
+
+html.no-scroll-timeline .vig-switch i {
+  transform: translateX(calc(20px * clamp(0, (var(--p) - 0.12 - var(--n) * 0.1) * 6, 1)));
+}
+
+html.no-scroll-timeline .vig-track i {
+  transform: scaleX(clamp(0, (var(--p) - 0.16) * 1.8, 1));
+}
+
+html.no-scroll-timeline .vig-mover {
+  transform: translateX(calc((100cqi - 36px) * clamp(0, (var(--p) - 0.16) * 1.8, 1)));
+}
+
+html.no-scroll-timeline .vig-check,
+html.no-scroll-timeline .os-check {
+  display: block;
+  opacity: clamp(0, calc((var(--p) - 0.62 - var(--n, 0) * 0.08) * 8), 1);
+  transform: scale(clamp(0.6, 0.6 + (var(--p) - 0.62) * 2, 1));
+}
+
+html.no-scroll-timeline .os-frame {
+  opacity: clamp(0, calc((var(--p) - var(--n) * 0.1) * 4), 1);
+  transform: translateY(calc(8px * (1 - min(max((var(--p) - var(--n) * 0.1) * 4, 0), 1))));
+}
+
+html.no-scroll-timeline .ok-dot {
+  opacity: clamp(0.35, calc(0.35 + (var(--p) - 0.28 - var(--n) * 0.1) * 3), 1);
+  transform: scale(clamp(0.7, 0.7 + (var(--p) - 0.28 - var(--n) * 0.1) * 1.4, 1));
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .diff-copy,
+  .diff-panel,
+  .os-frame {
+    opacity: 1;
+    transform: none;
+  }
+
+  .vig-switch__on {
+    opacity: 1;
+  }
+
+  .vig-switch i {
+    transform: translateX(20px);
+    background: var(--on-primary);
+  }
+
   .vig-track i {
     transform: scaleX(1);
   }
@@ -864,6 +939,16 @@
   .os-check {
     display: block;
     opacity: 1;
+    transform: none;
+  }
+
+  .ok-dot {
+    opacity: 1;
+    transform: none;
+  }
+
+  .probe {
+    opacity: 0;
   }
 }
 
@@ -923,88 +1008,64 @@
 }
 
 @keyframes switch-on {
-  0%,
-  14%,
-  78%,
-  100% {
+  from {
     opacity: 0;
   }
-  30%,
-  64% {
+  to {
     opacity: 1;
   }
 }
 
 @keyframes switch-thumb {
-  0%,
-  14%,
-  78%,
-  100% {
+  from {
     transform: translateX(0);
   }
-  30%,
-  64% {
+  to {
     transform: translateX(20px);
   }
 }
 
 @keyframes chip-travel {
-  0%,
-  14% {
-    transform: translateX(0);
+  from {
+    transform: translateX(-30px);
   }
-  58%,
-  76% {
-    transform: translateX(calc(100cqi - 36px));
-  }
-  94%,
-  100% {
-    transform: translateX(0);
+  to {
+    transform: translateX(calc(100cqi - 8px));
   }
 }
 
 @keyframes bar-fill {
-  0%,
-  14% {
+  from {
     transform: scaleX(0);
   }
-  58%,
-  76% {
+  to {
     transform: scaleX(1);
-  }
-  94%,
-  100% {
-    transform: scaleX(0);
   }
 }
 
 @keyframes check-pop {
-  0%,
-  52% {
+  from {
     opacity: 0;
     transform: scale(0.6);
   }
-  66%,
-  80% {
+  to {
     opacity: 1;
     transform: none;
-  }
-  94%,
-  100% {
-    opacity: 0;
-    transform: scale(0.6);
   }
 }
 
 @keyframes spark-pulse {
-  0%,
-  100% {
-    opacity: 0.72;
+  0% {
+    opacity: 0.7;
     transform: scale(1);
   }
-  50% {
+  55% {
     opacity: 1;
-    transform: scale(1.18);
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -1020,15 +1081,11 @@
 }
 
 @keyframes dot-pulse {
-  0%,
-  20%,
-  78%,
-  100% {
+  from {
     opacity: 0.35;
     transform: scale(0.7);
   }
-  36%,
-  58% {
+  to {
     opacity: 1;
     transform: scale(1);
   }

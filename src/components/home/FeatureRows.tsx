@@ -3,39 +3,47 @@ import CheckIcon from "@mui/icons-material/Check"
 import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined"
-import { useEffect, useRef, useState, type CSSProperties } from "react"
+import { useEffect, type CSSProperties } from "react"
 import { home } from "../../content/home.ts"
-import { BrandIcon, brandPaths } from "../brand/BrandIcon.tsx"
+import { BrandIcon } from "../brand/BrandIcon.tsx"
+import { brandPaths } from "../brand/brand-paths.ts"
 import { Logo } from "../brand/Logo.tsx"
 import { SectionHeading } from "../SectionHeading.tsx"
 
-function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
-}
-
-function useCardMotion<T extends HTMLElement>() {
-  const ref = useRef<T>(null)
-  const [entered, setEntered] = useState(true)
-  const [live, setLive] = useState(false)
-
+function useScrollProgress() {
   useEffect(() => {
-    const node = ref.current
-    document.documentElement.classList.add("js")
-    if (!node || prefersReducedMotion() || typeof IntersectionObserver !== "function") return
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const supported = CSS.supports("animation-timeline: view()")
+    if (reduce || supported) return
 
-    setEntered(false)
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setEntered(true)
-        setLive(entry.isIntersecting)
-      },
-      { threshold: 0.2 },
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
+    document.documentElement.classList.add("no-scroll-timeline")
+    const rows = () => document.querySelectorAll<HTMLElement>(".diff-row")
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const viewHeight = window.innerHeight
+      rows().forEach((row) => {
+        const rect = row.getBoundingClientRect()
+        const start = viewHeight * 0.92
+        const end = viewHeight * 0.18
+        const distance = start - end + rect.height
+        const progress = (start - rect.top) / distance
+        row.style.setProperty("--p", String(Math.min(1, Math.max(0, progress))))
+      })
+    }
+    const request = () => {
+      if (frame) return
+      frame = window.requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener("scroll", request, { passive: true })
+    window.addEventListener("resize", request)
+    return () => {
+      window.removeEventListener("scroll", request)
+      window.removeEventListener("resize", request)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
   }, [])
-
-  return { ref, entered, live }
 }
 
 const tones = ["violet", "blue", "pink", "teal"] as const
@@ -168,11 +176,9 @@ function Feature({
   body: string
   index: number
 }) {
-  const { ref, entered, live } = useCardMotion<HTMLElement>()
   const View = views[title]
-  const classes = ["diff-row", entered ? "is-in" : "", live ? "is-live" : ""].filter(Boolean).join(" ")
   return (
-    <article ref={ref} className={classes} style={{ "--i": index } as CSSProperties}>
+    <article className={`diff-row diff-row--${index}`} style={{ "--i": index, "--p": 1 } as CSSProperties}>
       <div className="diff-copy">
         <span className="diff-index">{String(index + 1).padStart(2, "0")}</span>
         <h3>{title}</h3>
@@ -187,6 +193,7 @@ function Feature({
 
 export function FeatureRows() {
   const block = home.difference
+  useScrollProgress()
   return (
     <section className="section features" aria-labelledby="difference-title">
       <div className="wrap">

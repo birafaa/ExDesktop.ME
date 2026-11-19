@@ -5,7 +5,8 @@ import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined"
 import { Link } from "react-router-dom"
 import { site } from "../../content/site.ts"
 import { ui } from "../../content/ui.ts"
-import { BrandIcon, brandPaths } from "../brand/BrandIcon.tsx"
+import { BrandIcon } from "../brand/BrandIcon.tsx"
+import { brandPaths } from "../brand/brand-paths.ts"
 import { Logo } from "../brand/Logo.tsx"
 
 export function Footer() {

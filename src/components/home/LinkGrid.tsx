@@ -3,7 +3,8 @@ import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined"
 import { Link } from "react-router-dom"
 import { home } from "../../content/home.ts"
 import { useReveal } from "../../hooks/useReveal.ts"
-import { BrandIcon, brandPaths } from "../brand/BrandIcon.tsx"
+import { BrandIcon } from "../brand/BrandIcon.tsx"
+import { brandPaths } from "../brand/brand-paths.ts"
 import { SectionHeading } from "../SectionHeading.tsx"
 
 function LinkMark({ title }: { title: string }) {
