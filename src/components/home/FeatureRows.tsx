@@ -1,83 +1,158 @@
+import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined"
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome"
+import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows"
+import LaptopMacIcon from "@mui/icons-material/LaptopMac"
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined"
+import TerminalIcon from "@mui/icons-material/Terminal"
+import type { SvgIconComponent } from "@mui/icons-material"
 import type { CSSProperties } from "react"
 import { home } from "../../content/home.ts"
 import { useReveal } from "../../hooks/useReveal.ts"
+import { Logo } from "../brand/Logo.tsx"
 import { SectionHeading } from "../SectionHeading.tsx"
 
-function PluginsArt() {
+const tones = ["violet", "blue", "pink", "teal"] as const
+
+function PluginsVignette() {
   return (
-    <svg viewBox="0 0 320 180" aria-hidden="true">
-      <rect className="diff-fill" x="28" y="46" width="132" height="96" rx="28" />
-      <rect className="diff-fill" x="160" y="34" width="132" height="96" rx="28" />
-      <rect className="diff-accent" x="94" y="62" width="132" height="96" rx="30" />
-      <rect className="diff-mark" x="142" y="94" width="36" height="36" rx="12" />
-    </svg>
+    <div className="vignette" aria-hidden="true">
+      <span className="vig-badge" translate="no">
+        SDK 1.4.6.2
+      </span>
+      <ul className="vig-list">
+        {tones.map((tone, index) => (
+          <li key={tone}>
+            <span className="vig-ico" data-tone={tone}>
+              <ExtensionOutlinedIcon fontSize="small" />
+            </span>
+            <span className="vig-lines">
+              <i />
+              <i />
+            </span>
+            <span className={index === 1 ? "vig-switch vig-switch--live" : "vig-switch"}>
+              <i />
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
-function PortArt() {
+function PortVignette() {
   return (
-    <svg viewBox="0 0 320 180" aria-hidden="true">
-      <rect className="diff-fill" x="24" y="40" width="100" height="100" rx="32" />
-      <circle className="diff-mark" cx="74" cy="90" r="16" />
-      <rect className="diff-accent" x="136" y="82" width="48" height="16" rx="8" />
-      <rect className="diff-accent" x="196" y="40" width="100" height="100" rx="32" />
-      <circle className="diff-on" cx="246" cy="90" r="16" />
-    </svg>
+    <div className="vignette vignette--port" aria-hidden="true">
+      <div className="vig-plugin">
+        <span className="vig-ico" data-tone="pink">
+          <ExtensionOutlinedIcon fontSize="small" />
+        </span>
+        <span>
+          <b translate="no">exteraGram</b>
+          <i />
+        </span>
+      </div>
+      <div className="vig-flow">
+        <span className="vig-track">
+          <i />
+        </span>
+        <span className="vig-port">
+          <AutoAwesomeIcon fontSize="small" />
+          Перенести с помощью ИИ
+        </span>
+      </div>
+      <div className="vig-plugin">
+        <Logo size={28} />
+        <span>
+          <b translate="no">exDesktop</b>
+          <i />
+        </span>
+      </div>
+    </div>
   )
 }
 
-function SystemsArt() {
+const systems: Array<{ label: string; icon: SvgIconComponent }> = [
+  { label: "Windows", icon: DesktopWindowsIcon },
+  { label: "Linux", icon: TerminalIcon },
+  { label: "macOS", icon: LaptopMacIcon },
+]
+
+function SystemsVignette() {
   return (
-    <svg viewBox="0 0 320 180" aria-hidden="true">
-      <rect className="diff-fill" x="36" y="40" width="68" height="112" rx="22" />
-      <rect className="diff-accent" x="126" y="24" width="68" height="128" rx="22" />
-      <rect className="diff-fill" x="216" y="52" width="68" height="100" rx="22" />
-      <rect className="diff-mark" x="148" y="48" width="24" height="8" rx="4" />
-    </svg>
+    <div className="vignette vignette--systems" aria-hidden="true">
+      {systems.map((system) => {
+        const Icon = system.icon
+        return (
+          <div key={system.label} className="os-frame">
+            <div className="os-frame__bar">
+              <Icon fontSize="small" />
+              <span className="ok-dot" />
+            </div>
+            <span className="os-frame__name">{system.label}</span>
+          </div>
+        )
+      })}
+    </div>
   )
 }
 
-function SandboxArt() {
+const blocked = ["Файлы", "Сеть", "Система"]
+
+function SandboxVignette() {
   return (
-    <svg viewBox="0 0 320 180" aria-hidden="true">
-      <rect className="diff-fill" x="36" y="22" width="248" height="136" rx="40" />
-      <rect className="diff-surface" x="78" y="48" width="164" height="84" rx="24" />
-      <circle className="diff-accent" cx="160" cy="90" r="14" />
-      <circle className="diff-mark" cx="58" cy="40" r="8" />
-      <circle className="diff-mark" cx="262" cy="140" r="8" />
-    </svg>
+    <div className="vignette vignette--sandbox" aria-hidden="true">
+      <ul className="vig-blocked">
+        {blocked.map((label) => (
+          <li key={label}>
+            <LockOutlinedIcon fontSize="inherit" />
+            {label}
+          </li>
+        ))}
+      </ul>
+      <div className="vig-sandbox">
+        <ShieldOutlinedIcon />
+        <span className="vig-ico" data-tone="violet">
+          <ExtensionOutlinedIcon fontSize="small" />
+        </span>
+        <span className="vig-lines">
+          <i />
+          <i />
+        </span>
+      </div>
+    </div>
   )
 }
 
-const art = {
-  Плагины: PluginsArt,
-  Перенос: PortArt,
-  Системы: SystemsArt,
-  Среда: SandboxArt,
+const views = {
+  Плагины: PluginsVignette,
+  Перенос: PortVignette,
+  Системы: SystemsVignette,
+  Среда: SandboxVignette,
 } as const
 
-function Card({
+function Row({
   title,
   body,
   index,
 }: {
-  title: keyof typeof art
+  title: keyof typeof views
   body: string
   index: number
 }) {
   const { ref, shown } = useReveal<HTMLElement>()
-  const Art = art[title]
+  const View = views[title]
   return (
     <article
       ref={ref}
-      className={shown ? "diff-card is-in" : "diff-card"}
+      className={shown ? "diff-row is-in" : "diff-row"}
       style={{ "--i": index } as CSSProperties}
     >
-      <div className="diff-card__art">
-        <Art />
+      <div className="diff-row__copy">
+        <h3>{title}</h3>
+        <p>{body}</p>
       </div>
-      <h3>{title}</h3>
-      <p>{body}</p>
+      <View />
     </article>
   )
 }
@@ -88,9 +163,9 @@ export function FeatureRows() {
     <section className="section features" aria-labelledby="difference-title">
       <div className="wrap">
         <SectionHeading id={block.id} titleId="difference-title" title={block.title} />
-        <div className="diff-bento">
+        <div className="diff-list">
           {block.items.map((item, index) => (
-            <Card key={item.title} title={item.title} body={item.body} index={index} />
+            <Row key={item.title} title={item.title} body={item.body} index={index} />
           ))}
         </div>
       </div>
