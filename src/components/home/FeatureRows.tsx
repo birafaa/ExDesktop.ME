@@ -75,9 +75,7 @@ function PortVignette() {
     <div className="vignette vignette--port" aria-hidden="true">
       <div className="port-board">
         <div className="vig-plugin">
-          <span className="vig-ico" data-tone="pink">
-            <ExtensionOutlinedIcon fontSize="small" />
-          </span>
+          <img className="extera-mark" src="/icons/exteragram.webp" alt="" width={40} height={40} />
           <b translate="no">exteraGram</b>
         </div>
         <div className="port-lane">
@@ -85,7 +83,7 @@ function PortVignette() {
             <i />
           </span>
           <span className="vig-mover">
-            <ExtensionOutlinedIcon fontSize="inherit" />
+            <img className="extera-mark" src="/icons/exteragram.webp" alt="" width={36} height={36} />
           </span>
         </div>
         <div className="vig-plugin vig-plugin--dest">
