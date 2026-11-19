@@ -129,37 +129,82 @@
 }
 
 .preview {
-  padding-bottom: var(--section-y);
-  overflow: clip;
+  padding-bottom: 28px;
+  overflow: visible;
 }
 
 .preview .hero__stage {
   max-width: 1040px;
   margin-inline: auto;
-  padding-top: 36px;
+  padding-top: clamp(108px, 22vw, 168px);
+  padding-bottom: 8px;
+}
+
+.preview .hero__back {
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  z-index: 0;
+  width: min(420px, 72%);
+  transform: translate(var(--px, 0px), var(--py, 0px)) rotate(4deg);
+  transform-origin: right top;
+  pointer-events: none;
 }
 
 .preview .hero__front {
-  width: min(820px, 100%);
-  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+  width: min(760px, 86%);
+  margin-right: auto;
+  margin-left: 0;
 }
 
 @media (min-width: 980px) {
   .preview .hero__stage {
-    padding-top: 78px;
+    padding-top: 176px;
+    padding-right: 24px;
   }
 
   .preview .hero__back {
-    top: 0;
-    right: 2%;
-    width: min(460px, 54%);
-    transform: translate(var(--px, 0px), var(--py, 0px)) rotate(6deg) scale(0.94);
+    top: 16px;
+    right: 8px;
+    width: min(460px, 48%);
   }
 
   .preview .hero__front {
-    width: min(780px, 84%);
-    margin-left: 0;
-    margin-right: auto;
+    width: min(780px, 78%);
+  }
+}
+
+@media (max-width: 699px) {
+  .preview .hero__stage {
+    padding-top: 92px;
+  }
+
+  .preview .hero__back {
+    top: 8px;
+    width: min(230px, 64%);
+    transform: translate(var(--px, 0px), var(--py, 0px)) rotate(3deg) scale(0.92);
+  }
+
+  .preview .hero__front {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .preview .hero__back {
+    animation: peek-settle 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes peek-settle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
