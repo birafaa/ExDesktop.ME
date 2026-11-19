@@ -6,14 +6,31 @@ import { Link } from "react-router-dom"
 import { home } from "../../content/home.ts"
 import { site } from "../../content/site.ts"
 import { ui } from "../../content/ui.ts"
+import type { MouseEvent } from "react"
 import { Logo } from "../brand/Logo.tsx"
 import { ChannelWindow } from "./ChannelWindow.tsx"
+import { SettingsPeek } from "./SettingsPeek.tsx"
+
+function shiftPeek(event: MouseEvent<HTMLDivElement>, reset = false) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+  const node = event.currentTarget
+  if (reset) {
+    node.style.setProperty("--px", "0px")
+    node.style.setProperty("--py", "0px")
+    return
+  }
+  const rect = node.getBoundingClientRect()
+  const x = ((event.clientX - rect.left) / rect.width - 0.5) * 16
+  const y = ((event.clientY - rect.top) / rect.height - 0.5) * 10
+  node.style.setProperty("--px", `${x.toFixed(1)}px`)
+  node.style.setProperty("--py", `${y.toFixed(1)}px`)
+}
 
 export function Hero() {
   return (
     <>
       <section className="hero section" aria-labelledby="hero-title">
-        <div className="wrap">
+        <div className="wrap hero__grid">
         <div className="hero__copy">
           <Logo size={72} />
           <h1 id="hero-title" translate="no">
@@ -55,8 +72,17 @@ export function Hero() {
             ))}
           </ul>
         </div>
-        <div className="hero__window">
-          <ChannelWindow />
+        <div
+          className="hero__stage"
+          onMouseMove={(event) => shiftPeek(event)}
+          onMouseLeave={(event) => shiftPeek(event, true)}
+        >
+          <div className="hero__back">
+            <SettingsPeek />
+          </div>
+          <div className="hero__front">
+            <ChannelWindow />
+          </div>
         </div>
         </div>
       </section>

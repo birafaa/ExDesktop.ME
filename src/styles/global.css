@@ -341,6 +341,7 @@ a {
 
 .hero {
   padding-top: var(--section-y);
+  overflow-x: clip;
 }
 
 .hero h1 {
@@ -370,8 +371,24 @@ a {
   font-weight: 800;
 }
 
-.hero__window {
-  margin-top: 32px;
+.hero__grid {
+  display: grid;
+  gap: 28px;
+}
+
+.hero__stage {
+  position: relative;
+  min-width: 0;
+}
+
+.hero__back {
+  display: none;
+}
+
+.hero__front {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
 }
 
 .link-grid {
