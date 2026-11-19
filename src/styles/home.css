@@ -400,7 +400,7 @@
   object-fit: cover;
 }
 
-.port-end b {
+.port-name {
   display: block;
   max-width: 100%;
   overflow: hidden;
@@ -434,8 +434,9 @@
 
 .vig-mover {
   position: absolute;
+  z-index: 1;
   top: 6px;
-  left: calc(var(--side) / 2 - 16px);
+  left: calc(var(--side) / 2 + 30px);
   display: grid;
   place-items: center;
   width: 32px;
@@ -450,14 +451,9 @@
 }
 
 .vig-check {
-  position: absolute;
-  right: -6px;
-  bottom: -4px;
   width: 18px;
   height: 18px;
-  padding: 1px;
-  border-radius: 50%;
-  background: var(--surface);
+  margin-top: 2px;
   color: var(--status);
   opacity: 0;
 }
@@ -902,7 +898,10 @@ html.no-scroll-timeline .vig-track i {
 }
 
 html.no-scroll-timeline .vig-mover {
-  transform: translateX(calc((100cqi - var(--side, 34.5%)) * clamp(0, (var(--p) - 0.16) * 1.8, 1)));
+  --travel: clamp(0, (var(--p) - 0.16) * 1.8, 1);
+  --fade: clamp(0, (var(--p) - 0.64) * 6, 1);
+  opacity: calc(1 - var(--fade));
+  transform: translateX(calc((100cqi - var(--side, 34.5%) - 92px) * var(--travel))) scale(calc(1 - 0.3 * var(--fade)));
 }
 
 html.no-scroll-timeline .vig-check,
@@ -944,7 +943,8 @@ html.no-scroll-timeline .ok-dot {
   }
 
   .vig-mover {
-    transform: translateX(calc(100cqi - var(--side, 34.5%)));
+    opacity: 0;
+    transform: translateX(calc(100cqi - var(--side, 34.5%) - 92px)) scale(0.7);
   }
 
   .vig-check,
@@ -1038,11 +1038,17 @@ html.no-scroll-timeline .ok-dot {
 }
 
 @keyframes chip-travel {
-  from {
-    transform: translateX(0);
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
-  to {
-    transform: translateX(calc(100cqi - var(--side, 34.5%)));
+  78% {
+    opacity: 1;
+    transform: translateX(calc(100cqi - var(--side, 34.5%) - 92px)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(100cqi - var(--side, 34.5%) - 92px)) scale(0.7);
   }
 }
 

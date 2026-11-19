@@ -84,15 +84,19 @@ function PortVignette() {
           <span className="port-app">
             <img className="extera-mark" src="/icons/exteragram.webp" alt="" width={44} height={44} />
           </span>
-          <b translate="no">exteraGram</b>
+          <span className="port-name" translate="no">
+            exteraGram
+          </span>
         </div>
         <div className="port-gap" />
         <div className="port-end">
           <span className="port-app">
             <Logo size={44} />
-            <CheckIcon className="vig-check" fontSize="inherit" />
           </span>
-          <b translate="no">exDesktop</b>
+          <span className="port-name" translate="no">
+            exDesktop
+          </span>
+          <CheckIcon className="vig-check" fontSize="inherit" />
         </div>
         <span className="vig-track">
           <i />
