@@ -89,8 +89,8 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .diff-grid:not(.is-in) .diff-tile,
-  .cta-band:not(.is-in) {
+  html.js .diff-grid:not(.is-in) .diff-tile,
+  html.js .cta-band:not(.is-in) {
     opacity: 0;
     transform: translateY(14px);
   }

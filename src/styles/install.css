@@ -205,7 +205,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .steps:not(.is-in) li {
+  html.js .steps:not(.is-in) li {
     opacity: 0;
     transform: translateY(10px);
   }
