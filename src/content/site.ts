@@ -4,7 +4,6 @@
  */
 export const site = {
   name: "exDesktop",
-  version: "7.3.3.(5)",
   license: "GPL-3.0",
   licenseUrl: "https://www.gnu.org/licenses/gpl-3.0.html",
   summary:
@@ -24,8 +23,5 @@ export const site = {
     windows: "Скачать для Windows",
     macos: "Скачать для macOS",
     linux: "Установить на Linux",
-  },
-  placeholders: {
-    requirements: "[требования]",
   },
 } as const

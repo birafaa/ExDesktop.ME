@@ -51,17 +51,6 @@ export function Hero() {
           </h1>
           <p className="section-intro">{home.hero.extra}</p>
           <div className="hero__actions">{download}</div>
-          <p className="hero__meta">
-            <span translate="no">{site.version}</span>
-            {active === "windows" ? (
-              <>
-                {" · "}
-                <span translate="no">{site.windows.size}</span>
-              </>
-            ) : null}
-            {" · "}
-            {site.placeholders.requirements}
-          </p>
         </div>
       </section>
       <section className="preview" aria-hidden="true">

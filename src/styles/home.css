@@ -79,14 +79,6 @@
   font-size: 26px;
 }
 
-.hero__meta {
-  max-width: 36rem;
-  margin: 8px 0 0;
-  color: var(--ink-muted);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
 .preview {
   padding-bottom: 28px;
   overflow: visible;
