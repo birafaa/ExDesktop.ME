@@ -103,7 +103,7 @@ export function InstallStage({ os }: { os: OsId }) {
           {order.map((id, pane) => (
             <ol
               key={id}
-              className="install-steps"
+              className={os === id ? "install-steps is-current" : "install-steps"}
               ref={steps.setRef(pane)}
               inert={os !== id}
               aria-hidden={os !== id}
@@ -111,12 +111,17 @@ export function InstallStage({ os }: { os: OsId }) {
               {install.systems[id].steps.map((step, stepIndex) => {
                 const Icon = stepIcons[id][stepIndex]
                 return (
-                  <li key={step}>
+                  <li key={step.title} style={{ "--step": stepIndex } as CSSProperties}>
                     <span className="install-steps__n" aria-hidden="true">
                       {stepIndex + 1}
                     </span>
-                    <Icon aria-hidden="true" />
-                    <span>{step}</span>
+                    <div className="install-steps__body">
+                      <span className="install-steps__title">
+                        <Icon aria-hidden="true" />
+                        {step.title}
+                      </span>
+                      <p>{step.description}</p>
+                    </div>
                   </li>
                 )
               })}
