@@ -1,4 +1,3 @@
-import { site } from "../../content/site.ts"
 import { Logo } from "../brand/Logo.tsx"
 
 const tiles = [
@@ -83,9 +82,6 @@ export function SettingsPeek() {
         <span className="peek__x">×</span>
       </div>
       <Logo size={48} />
-      <p className="peek__name" translate="no">
-        {site.name}
-      </p>
       <p className="peek__ver" translate="no">
         7.3.3.9
       </p>
