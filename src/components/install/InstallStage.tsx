@@ -44,6 +44,8 @@ function useActiveHeight(index: number) {
 
 export function InstallStage({ os }: { os: OsId }) {
   const index = order.indexOf(os)
+  const [slide, setSlide] = useState({ index, move: 0 })
+  if (slide.index !== index) setSlide({ index, move: slide.move + 1 })
   const motion = { "--i": index } as CSSProperties
   const body = useActiveHeight(index)
   const steps = useActiveHeight(index)
@@ -52,9 +54,14 @@ export function InstallStage({ os }: { os: OsId }) {
     <div className="install-stage">
       <div className="install-frame">
         <div className="install-frame__bar">
-          <i />
-          <i />
-          <i />
+          <span className="install-dots" style={motion} aria-hidden="true">
+            <i />
+            <i />
+            <i />
+            <span className="install-dots__mark">
+              <span key={slide.move} className={slide.move ? "is-go" : undefined} />
+            </span>
+          </span>
           <div className="install-frame__title">
             <div className="install-track" style={motion}>
               {order.map((id) => (
