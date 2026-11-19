@@ -28,12 +28,5 @@ export const site = {
   otherPlatforms: "Другие платформы",
   placeholders: {
     requirements: "[требования]",
-    interactive: "[название блока]",
-    roadmap: [
-      "[этап 1]",
-      "[этап 2]",
-      "[этап 3]",
-      "[этап 4]",
-    ],
   },
 } as const
