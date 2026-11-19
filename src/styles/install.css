@@ -1,5 +1,91 @@
 .install-page {
-  padding: var(--section-y) 0;
+  padding: var(--section-y) 0 64px;
+}
+
+.install-hero {
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.install-hero__os {
+  margin: 0 0 12px;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.install-hero h1 {
+  margin: 0;
+  font-family: "Unbounded Variable", Unbounded, sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.install-hero > p,
+.install-hero .install-note {
+  max-width: 38rem;
+  margin: 16px auto 0;
+}
+
+.install-go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 68px;
+  margin-top: 28px;
+  padding: 0 34px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.install-go:hover {
+  background: var(--primary-hover);
+}
+
+.install-switch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  margin-top: 18px;
+}
+
+.install-switch button {
+  padding: 6px 4px;
+  border: 0;
+  background: none;
+  color: var(--ink-muted);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.install-switch button.is-selected {
+  color: var(--ink);
+}
+
+.next-steps {
+  max-width: 720px;
+  margin: 36px auto 0;
+  padding: 8px 8px 12px;
+  animation: step-in 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.next-steps .install-command__row,
+.next-steps .install-file__name {
+  margin-bottom: 18px;
 }
 
 .install-page__intro h1 {
@@ -117,6 +203,7 @@
 }
 
 .steps h2,
+.steps h3,
 .install-req h2,
 .install-faq h2 {
   margin: 0;
