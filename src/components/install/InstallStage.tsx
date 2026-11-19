@@ -4,9 +4,12 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined"
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded"
 import TerminalOutlinedIcon from "@mui/icons-material/TerminalOutlined"
 import type { SvgIconComponent } from "@mui/icons-material"
+import { useLayoutEffect, useRef, useState, type CSSProperties } from "react"
 import { CopyButton } from "../CopyButton.tsx"
 import { install, type OsId } from "../../content/install.ts"
 import { site } from "../../content/site.ts"
+
+const order: OsId[] = ["windows", "linux", "macos"]
 
 const stepIcons: Record<OsId, SvgIconComponent[]> = {
   windows: [DownloadOutlinedIcon, PlayArrowRoundedIcon, DesktopWindowsOutlinedIcon],
@@ -14,53 +17,113 @@ const stepIcons: Record<OsId, SvgIconComponent[]> = {
   macos: [TerminalOutlinedIcon, ContentPasteOutlinedIcon, DesktopWindowsOutlinedIcon],
 }
 
+function titleFor(id: OsId) {
+  if (id === "windows") return site.windows.file
+  return install.systems[id].label
+}
+
+function useActiveHeight(index: number) {
+  const refs = useRef<Array<HTMLElement | null>>([])
+  const [height, setHeight] = useState<number>()
+  const setRef = (slot: number) => (node: HTMLElement | null) => {
+    refs.current[slot] = node
+  }
+
+  useLayoutEffect(() => {
+    const node = refs.current[index]
+    if (!node) return
+    const apply = () => setHeight(node.offsetHeight)
+    apply()
+    const observer = new ResizeObserver(apply)
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [index])
+
+  return { setRef, height }
+}
+
 export function InstallStage({ os }: { os: OsId }) {
-  const icons = stepIcons[os]
+  const index = order.indexOf(os)
+  const motion = { "--i": index } as CSSProperties
+  const body = useActiveHeight(index)
+  const steps = useActiveHeight(index)
+
   return (
-    <div className="install-stage" key={os}>
-      {os === "windows" ? (
-        <div className="install-win">
-          <div className="install-win__bar">
-            <i />
-            <i />
-            <i />
-            <b translate="no">{site.windows.file}</b>
-          </div>
-          <a className="install-go" href={site.windows.href}>
-            <DownloadOutlinedIcon />
-            {install.download}
-          </a>
-          <p className="install-caption" translate="no">
-            {site.windows.file} · {site.windows.size}
-          </p>
-        </div>
-      ) : (
-        <div className="install-term">
-          <div className="install-term__bar" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="install-command__row">
-            <code translate="no">{site.installCommand}</code>
-            <CopyButton text={site.installCommand} />
+    <div className="install-stage">
+      <div className="install-frame">
+        <div className="install-frame__bar">
+          <i />
+          <i />
+          <i />
+          <div className="install-frame__title">
+            <div className="install-track" style={motion}>
+              {order.map((id) => (
+                <b key={id} translate="no" aria-hidden={id !== os}>
+                  {titleFor(id)}
+                </b>
+              ))}
+            </div>
           </div>
         </div>
-      )}
-      <ol className="install-steps">
-        {install.systems[os].steps.map((step, index) => {
-          const Icon = icons[index]
-          return (
-            <li key={step}>
-              <span className="install-steps__n" aria-hidden="true">
-                {index + 1}
-              </span>
-              <Icon aria-hidden="true" />
-              <span>{step}</span>
-            </li>
-          )
-        })}
-      </ol>
+        <div className="install-frame__view" style={body.height ? { height: body.height } : undefined}>
+          <div className="install-track" style={motion}>
+            <div
+              className="install-pane install-pane--windows"
+              ref={body.setRef(0)}
+              inert={os !== "windows"}
+              aria-hidden={os !== "windows"}
+            >
+              <a className="install-go" href={site.windows.href}>
+                <DownloadOutlinedIcon />
+                {install.download}
+              </a>
+              <p className="install-caption" translate="no">
+                {site.windows.size}
+              </p>
+            </div>
+            {(["linux", "macos"] as const).map((id, offset) => (
+              <div
+                key={id}
+                className="install-pane"
+                ref={body.setRef(offset + 1)}
+                inert={os !== id}
+                aria-hidden={os !== id}
+              >
+                <div className="install-command__row">
+                  <code translate="no">{site.installCommand}</code>
+                  <CopyButton text={site.installCommand} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="install-steps-view" style={steps.height ? { height: steps.height } : undefined}>
+        <div className="install-track" style={motion}>
+          {order.map((id, pane) => (
+            <ol
+              key={id}
+              className="install-steps"
+              ref={steps.setRef(pane)}
+              inert={os !== id}
+              aria-hidden={os !== id}
+            >
+              {install.systems[id].steps.map((step, stepIndex) => {
+                const Icon = stepIcons[id][stepIndex]
+                return (
+                  <li key={step}>
+                    <span className="install-steps__n" aria-hidden="true">
+                      {stepIndex + 1}
+                    </span>
+                    <Icon aria-hidden="true" />
+                    <span>{step}</span>
+                  </li>
+                )
+              })}
+            </ol>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
