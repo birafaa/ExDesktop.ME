@@ -1,14 +1,11 @@
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome"
 import CheckIcon from "@mui/icons-material/Check"
-import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows"
 import ExtensionOutlinedIcon from "@mui/icons-material/ExtensionOutlined"
-import LaptopMacIcon from "@mui/icons-material/LaptopMac"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined"
-import TerminalIcon from "@mui/icons-material/Terminal"
-import type { SvgIconComponent } from "@mui/icons-material"
 import { useEffect, useRef, useState, type CSSProperties } from "react"
 import { home } from "../../content/home.ts"
+import { BrandIcon, brandPaths } from "../brand/BrandIcon.tsx"
 import { Logo } from "../brand/Logo.tsx"
 import { SectionHeading } from "../SectionHeading.tsx"
 
@@ -100,28 +97,25 @@ function PortVignette() {
   )
 }
 
-const systems: Array<{ label: string; icon: SvgIconComponent }> = [
-  { label: "Windows", icon: DesktopWindowsIcon },
-  { label: "Linux", icon: TerminalIcon },
-  { label: "macOS", icon: LaptopMacIcon },
-]
+const systems = [
+  { label: "Windows", path: brandPaths.windows },
+  { label: "Linux", path: brandPaths.linux },
+  { label: "macOS", path: brandPaths.apple },
+] as const
 
 function SystemsVignette() {
   return (
     <div className="vignette vignette--systems" aria-hidden="true">
-      {systems.map((system, index) => {
-        const Icon = system.icon
-        return (
-          <div key={system.label} className="os-frame" style={{ "--n": index } as CSSProperties}>
-            <div className="os-frame__bar">
-              <Icon fontSize="small" />
-              <span className="ok-dot" />
-              <CheckIcon className="os-check" fontSize="inherit" />
-            </div>
-            <span className="os-frame__name">{system.label}</span>
+      {systems.map((system, index) => (
+        <div key={system.label} className="os-frame" style={{ "--n": index } as CSSProperties}>
+          <div className="os-frame__bar">
+            <BrandIcon path={system.path} size={28} />
+            <span className="ok-dot" />
+            <CheckIcon className="os-check" fontSize="inherit" />
           </div>
-        )
-      })}
+          <span className="os-frame__name">{system.label}</span>
+        </div>
+      ))}
     </div>
   )
 }

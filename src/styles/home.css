@@ -494,6 +494,11 @@
   color: var(--ink);
 }
 
+.os-frame .brand-icon {
+  width: 28px;
+  height: 28px;
+}
+
 .os-frame__name {
   font-size: 1rem;
   font-weight: 800;
