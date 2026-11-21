@@ -139,20 +139,32 @@ export function DocsPage() {
 
   useEffect(() => {
     const nodes = visible
-      .map((section) => document.getElementById(section.id))
-      .filter((node): node is HTMLElement => node instanceof HTMLElement)
+      .map((section) => document.querySelector<HTMLElement>(`[data-docs-section="${section.id}"]`))
+      .filter((node): node is HTMLElement => node !== null)
     if (nodes.length === 0) return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const hit = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (hit) setActive(hit.target.id)
-      },
-      { rootMargin: "-20% 0px -55% 0px", threshold: [0.1, 0.4, 0.8] },
-    )
-    for (const node of nodes) observer.observe(node)
-    return () => observer.disconnect()
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const line = window.innerHeight * 0.3
+      let current = nodes[0]
+      for (const node of nodes) {
+        if (node.getBoundingClientRect().top <= line) current = node
+      }
+      const id = current?.dataset.docsSection
+      if (id) setActive(id)
+    }
+    const request = () => {
+      if (frame) return
+      frame = window.requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener("scroll", request, { passive: true })
+    window.addEventListener("resize", request)
+    return () => {
+      window.removeEventListener("scroll", request)
+      window.removeEventListener("resize", request)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
   }, [visible])
 
   return (

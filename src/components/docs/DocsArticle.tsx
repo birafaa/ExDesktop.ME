@@ -154,7 +154,12 @@ export function DocsArticle({
           ))
         : null}
       {sections.map((section) => (
-        <section key={section.id} aria-labelledby={`${section.id}-title`} className="docs-section">
+        <section
+          key={section.id}
+          data-docs-section={section.id}
+          aria-labelledby={section.id}
+          className="docs-section"
+        >
           <h2 id={section.id}>
             <Highlight text={section.title} query={query} />
           </h2>
