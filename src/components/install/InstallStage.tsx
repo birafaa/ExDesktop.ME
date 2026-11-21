@@ -18,7 +18,6 @@ const stepIcons: Record<OsId, SvgIconComponent[]> = {
 }
 
 function titleFor(id: OsId) {
-  if (id === "windows") return site.windows.file
   return install.systems[id].label
 }
 
@@ -56,9 +55,9 @@ export function InstallStage({ os }: { os: OsId }) {
             <span className="install-dots__lights">
               <span className="install-dots__mark" />
             </span>
-            <i className={index === 0 ? "is-lit" : undefined} />
-            <i className={index === 1 ? "is-lit" : undefined} />
-            <i className={index === 2 ? "is-lit" : undefined} />
+            <i />
+            <i />
+            <i />
           </span>
           <div className="install-frame__title">
             <div className="install-track" style={motion}>
