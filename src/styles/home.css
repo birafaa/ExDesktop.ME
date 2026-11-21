@@ -1048,6 +1048,8 @@ html.no-scroll-timeline .ok-dot {
   from {
     transform: scaleX(0);
   }
+  /* Оранжевая линия доходит до конца одновременно с чипом (он останавливается на 78%). */
+  78%,
   to {
     transform: scaleX(1);
   }

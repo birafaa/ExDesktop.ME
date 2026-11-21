@@ -6,7 +6,7 @@ export const home = {
   },
   difference: {
     id: "difference",
-    title: "Чем отличается",
+    title: "Почему ExDesktop?",
     items: [
       {
         title: "Плагины",
