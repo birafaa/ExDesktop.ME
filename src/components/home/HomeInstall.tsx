@@ -17,7 +17,7 @@ export function HomeInstall() {
   return (
     <section className="section" aria-labelledby="cta-title">
       <div className="wrap install-block">
-        <SectionHeading id="install-home" titleId="cta-title" title={block.title} intro={block.body} />
+        <SectionHeading id="install-home" titleId="cta-title" title={block.title} />
         <div ref={ref} className={shown ? "install-panel is-in" : "install-panel"}>
           <OsTabs os={active} label={install.osLabel} onChange={setOs} />
           <InstallAction os={active} />

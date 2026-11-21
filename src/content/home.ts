@@ -2,7 +2,7 @@ import { site } from "./site.ts"
 
 export const home = {
   hero: {
-    extra: "Неофициальный клиент Telegram для компьютера с функциями, которых нет в обычном.",
+    extra: "Мы можем больше, чем вы думаете",
   },
   difference: {
     id: "difference",
@@ -28,7 +28,6 @@ export const home = {
   },
   cta: {
     title: "Быстрая установка",
-    body: "Windows: скачайте установщик. Linux и macOS: вставьте команду в терминал.",
     install: "К установке",
     docs: "Документация",
   },
